@@ -22,6 +22,9 @@
 		4B674E2B1830B19200C6A98D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E0A1830B19100C6A98D /* UIKit.framework */; };
 		4B674E331830B19200C6A98D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B674E311830B19200C6A98D /* InfoPlist.strings */; };
 		4B674E351830B19200C6A98D /* UpperNotificationViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E341830B19200C6A98D /* UpperNotificationViewTests.m */; };
+		4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E3E1830B1C300C6A98D /* QuartzCore.framework */; };
+		4B674E441830B25400C6A98D /* UpperNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E421830B25400C6A98D /* UpperNotificationController.m */; };
+		4B674E481830B26600C6A98D /* UpperNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E471830B26600C6A98D /* UpperNotificationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,11 @@
 		4B674E301830B19200C6A98D /* UpperNotificationViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UpperNotificationViewTests-Info.plist"; sourceTree = "<group>"; };
 		4B674E321830B19200C6A98D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B674E341830B19200C6A98D /* UpperNotificationViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationViewTests.m; sourceTree = "<group>"; };
+		4B674E3E1830B1C300C6A98D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4B674E411830B25400C6A98D /* UpperNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpperNotificationController.h; sourceTree = "<group>"; };
+		4B674E421830B25400C6A98D /* UpperNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationController.m; sourceTree = "<group>"; };
+		4B674E461830B26600C6A98D /* UpperNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpperNotificationView.h; sourceTree = "<group>"; };
+		4B674E471830B26600C6A98D /* UpperNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */,
 				4B674E091830B19100C6A98D /* CoreGraphics.framework in Frameworks */,
 				4B674E0B1830B19100C6A98D /* UIKit.framework in Frameworks */,
 				4B674E071830B19100C6A98D /* Foundation.framework in Frameworks */,
@@ -103,6 +112,7 @@
 		4B674E051830B19100C6A98D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B674E3E1830B1C300C6A98D /* QuartzCore.framework */,
 				4B674E061830B19100C6A98D /* Foundation.framework */,
 				4B674E081830B19100C6A98D /* CoreGraphics.framework */,
 				4B674E0A1830B19100C6A98D /* UIKit.framework */,
@@ -114,6 +124,7 @@
 		4B674E0C1830B19100C6A98D /* UpperNotificationView */ = {
 			isa = PBXGroup;
 			children = (
+				4B674E401830B1D200C6A98D /* UpperNotificationView */,
 				4B674E151830B19100C6A98D /* AppDelegate.h */,
 				4B674E161830B19100C6A98D /* AppDelegate.m */,
 				4B674E181830B19100C6A98D /* Main_iPhone.storyboard */,
@@ -153,6 +164,17 @@
 				4B674E311830B19200C6A98D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4B674E401830B1D200C6A98D /* UpperNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				4B674E411830B25400C6A98D /* UpperNotificationController.h */,
+				4B674E421830B25400C6A98D /* UpperNotificationController.m */,
+				4B674E461830B26600C6A98D /* UpperNotificationView.h */,
+				4B674E471830B26600C6A98D /* UpperNotificationView.m */,
+			);
+			path = UpperNotificationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +277,9 @@
 			files = (
 				4B674E201830B19100C6A98D /* ViewController.m in Sources */,
 				4B674E171830B19100C6A98D /* AppDelegate.m in Sources */,
+				4B674E481830B26600C6A98D /* UpperNotificationView.m in Sources */,
 				4B674E131830B19100C6A98D /* main.m in Sources */,
+				4B674E441830B25400C6A98D /* UpperNotificationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
