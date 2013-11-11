@@ -16,6 +16,7 @@ typedef void(^TapHandler)();
 @property (nonatomic, copy) NSString *message;
 @property (nonatomic, copy) UIImage *image;
 
+- (void)configureColor;
 - (void)setTapHandler:(TapHandler)tapHandler;
 
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image;
@@ -24,4 +25,13 @@ typedef void(^TapHandler)();
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image;
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
 - (void)showInView:(UIView *)view;
+
+@end
+
+@interface UpperNotificationCautionView : UpperNotificationView
+
+@end
+
+@interface UpperNotificationSuccessView : UpperNotificationView
+
 @end
