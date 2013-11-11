@@ -35,3 +35,7 @@ typedef void(^TapHandler)();
 @interface UpperNotificationSuccessView : UpperNotificationView
 
 @end
+
+@interface UpperNotificationFaiureView : UpperNotificationView
+
+@end

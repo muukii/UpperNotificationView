@@ -189,7 +189,7 @@ __isIOS7()
         animationPoint.y -= CGRectGetHeight(self.frame);
         self.center = animationPoint;
     } completion:^(BOOL finished) {
-
+        [self removeFromSuperview];
     }];
 }
 
@@ -219,6 +219,15 @@ __isIOS7()
     self.backgroundColor = [UIColor colorWithRed:0.337 green:0.569 blue:0.384 alpha:0.500];
     self.messageLabel.textColor = [UIColor whiteColor];
 
+}
+
+@end
+
+@implementation UpperNotificationFaiureView
+- (void)configureColor
+{
+    self.backgroundColor = [UIColor colorWithRed:0.469 green:0.426 blue:0.770 alpha:0.500];
+    self.messageLabel.textColor = [UIColor whiteColor];
 }
 
 @end
