@@ -21,6 +21,7 @@ __isIOS7()
 #import "UpperNotificationView.h"
 @interface UpperNotificationManager : NSObject
 @property (nonatomic, retain) NSMutableArray *notifications;
+
 @end
 
 @implementation UpperNotificationManager
@@ -32,9 +33,17 @@ __isIOS7()
 #define ANIMATION_DURATION 0.3
 #define SELF_MINIMUM_HEIGHT 44.f
 #define MESSAGE_MARGIN 20.f
+@interface UpperNotificationView ()
+@property (nonatomic, retain) UIView *animationView;
+@end
 @implementation UpperNotificationView
 {
     TapHandler _tapHandler;
+    UIDynamicAnimator *_dynamicAnimator;
+    UIPushBehavior *_pushBehavior;
+    UIGravityBehavior *_gravityBehavior;
+    UICollisionBehavior* _collision;
+    CGFloat statusBarHeight;
 }
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image
 {
@@ -66,6 +75,9 @@ __isIOS7()
         [self setTapHandler:tapHandler];
         [self configureView];
         [self configureColor];
+        if (IsIOS7) {
+            [self configureDynamicAnimation];
+        }
         [self setGesture];
         [self setMessage:message];
         [self setImage:image];
@@ -75,8 +87,13 @@ __isIOS7()
 
 - (void)configureView
 {
+    statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
 
-    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, 270 , 44)];
+    self.animationView = [[UIView alloc] initWithFrame:CGRectMake(0, -600, 320, 600)];
+    self.animationView.opaque = NO;
+    self.animationView.backgroundColor = [UIColor clearColor];
+
+    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, 270 , 0)];
     self.messageLabel.backgroundColor = [UIColor clearColor];
     self.messageLabel.numberOfLines = 0;
     [self.messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -90,10 +107,16 @@ __isIOS7()
     [self addSubview:self.imageView];
 
 }
+
 - (void)configureColor
 {
     [self setBackgroundColor:[UIColor colorWithWhite:0.000 alpha:0.500]];
     self.messageLabel.textColor = [UIColor whiteColor];
+}
+
+- (void)configureDynamicAnimation
+{
+
 }
 
 - (void)setGesture
@@ -104,6 +127,9 @@ __isIOS7()
 
 - (void)tapGestureHandler:(id)sender
 {
+    if (IsIOS7) {
+        [_dynamicAnimator removeAllBehaviors];
+    }
     if (_tapHandler) {
         _tapHandler();
     }
@@ -127,7 +153,8 @@ __isIOS7()
 
 
     NSLog(@"%@",NSStringFromCGSize(size));
-    size.height += MESSAGE_MARGIN;
+
+    size.height += MESSAGE_MARGIN + statusBarHeight;
     if (size.height > SELF_MINIMUM_HEIGHT - MESSAGE_MARGIN) {
         CGRect messageLabelRect = self.messageLabel.frame;
         messageLabelRect.size = size;
@@ -138,8 +165,14 @@ __isIOS7()
         self.frame = selfRect;
 
         CGPoint messageLabelCenter = self.messageLabel.center;
-        messageLabelCenter.y = CGRectGetMidY(self.frame);
+        messageLabelCenter.y = CGRectGetMidY(self.frame) + statusBarHeight/2;
         self.messageLabel.center = messageLabelCenter;
+
+        if (IsIOS7) {
+            CGRect animationViewRect = self.animationView.frame;
+            animationViewRect.origin.y += self.frame.size.height;
+            self.animationView.frame = animationViewRect;
+        }
     }
     self.messageLabel.text = message;
 }
@@ -157,10 +190,20 @@ __isIOS7()
 {
     NSOperationQueue *queue = [NSOperationQueue mainQueue];
     [queue addOperationWithBlock:^{
-        [view addSubview:self];
+        if (IsIOS7) {
+            [self.animationView addSubview:self];
+            [view addSubview:self.animationView];
+        } else {
+            [view addSubview:self];
+        }
         [self display];
 
-        double delayInSeconds = 2.0;
+        double delayInSeconds;
+        if (IsIOS7) {
+            delayInSeconds = 3.f;
+        } else {
+            delayInSeconds = 2.f;
+        }
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [self dismiss];
@@ -171,25 +214,47 @@ __isIOS7()
 
 - (void)display
 {
-    CGPoint originPoint = self.center;
-    CGPoint animationPoint = originPoint;
-    animationPoint.y -= CGRectGetHeight(self.frame);
-    self.center = animationPoint;
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.center = originPoint;
-    } completion:^(BOOL finished) {
 
-    }];
+
+    if (IsIOS7) {
+        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:self.animationView];
+
+        _pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self] mode:UIPushBehaviorModeInstantaneous];
+        [_pushBehavior setPushDirection:CGVectorMake(0, 1)];
+
+        _gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self]];
+        CGFloat magnitude = CGRectGetHeight(self.frame) * 0.01 * 3;
+        [_gravityBehavior setMagnitude:magnitude];
+        _collision = [[UICollisionBehavior alloc]
+                      initWithItems:@[self]];
+        _collision.translatesReferenceBoundsIntoBoundary = YES;
+        [_dynamicAnimator addBehavior:_collision];
+        [_dynamicAnimator addBehavior:_gravityBehavior];
+    } else {
+        CGPoint originPoint = self.center;
+        CGPoint animationPoint = originPoint;
+        animationPoint.y -= CGRectGetHeight(self.frame);
+        self.center = animationPoint;
+        [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.center = originPoint;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 - (void)dismiss
 {
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         CGPoint animationPoint = self.center;
         animationPoint.y -= CGRectGetHeight(self.frame);
         self.center = animationPoint;
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
+        if (IsIOS7) {
+            [self.animationView removeFromSuperview];
+        } else {
+            [self removeFromSuperview];
+        }
     }];
 }
 
