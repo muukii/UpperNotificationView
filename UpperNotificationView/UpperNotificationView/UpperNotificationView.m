@@ -20,11 +20,38 @@ __isIOS7()
 
 #import "UpperNotificationView.h"
 @interface UpperNotificationManager : NSObject
++ (instancetype)sharedManager;
 @property (nonatomic, retain) NSMutableArray *notifications;
+
+- (void)showInView:(UIView *)view notificationView:(UpperNotificationView *)notificationView;
 
 @end
 
 @implementation UpperNotificationManager
+static id _sharedInstance = nil;
++ (instancetype)sharedManager
+{
+    if (nil == _sharedInstance) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _sharedInstance = [[self alloc] init];
+        });
+    }
+    return _sharedInstance;
+}
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.notifications = [NSMutableArray array];
+    }
+    return self;
+}
+
+- (void)showInView:(UIView *)view notificationView:(UpperNotificationView *)notificationView
+{
+
+}
 
 @end
 
@@ -44,6 +71,7 @@ __isIOS7()
     UIGravityBehavior *_gravityBehavior;
     UICollisionBehavior* _collision;
     CGFloat statusBarHeight;
+    UIWindow *notificationWindow;
 }
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image
 {
@@ -188,11 +216,20 @@ __isIOS7()
 }
 - (void)showInView:(UIView *)view
 {
+    UIWindow *window = view.window;
+//    window.windowLevel = UIWindowLevelAlert;
     NSOperationQueue *queue = [NSOperationQueue mainQueue];
+
+    notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    notificationWindow.windowLevel = UIWindowLevelAlert;
+    [notificationWindow makeKeyAndVisible];
+
     [queue addOperationWithBlock:^{
+        [[UpperNotificationManager sharedManager].notifications addObject:self];
+
         if (IsIOS7) {
             [self.animationView addSubview:self];
-            [view addSubview:self.animationView];
+            [notificationWindow addSubview:self.animationView];
         } else {
             [view addSubview:self];
         }
@@ -255,6 +292,9 @@ __isIOS7()
         } else {
             [self removeFromSuperview];
         }
+        NSLog(@"%@",[UpperNotificationManager sharedManager].notifications);
+        [[UpperNotificationManager sharedManager].notifications removeObject:self];
+        notificationWindow = nil;
     }];
 }
 

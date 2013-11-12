@@ -24,6 +24,8 @@
 		4B674E351830B19200C6A98D /* UpperNotificationViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E341830B19200C6A98D /* UpperNotificationViewTests.m */; };
 		4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E3E1830B1C300C6A98D /* QuartzCore.framework */; };
 		4B674E481830B26600C6A98D /* UpperNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E471830B26600C6A98D /* UpperNotificationView.m */; };
+		4BE3F25B1832168A000E8DF6 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE3F25A1832168A000E8DF6 /* Reveal.framework */; };
+		4BE3F25D18321696000E8DF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE3F25C18321696000E8DF6 /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		4B674E3E1830B1C300C6A98D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4B674E461830B26600C6A98D /* UpperNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpperNotificationView.h; sourceTree = "<group>"; };
 		4B674E471830B26600C6A98D /* UpperNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationView.m; sourceTree = "<group>"; };
+		4BE3F25A1832168A000E8DF6 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		4BE3F25C18321696000E8DF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +71,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BE3F25D18321696000E8DF6 /* CFNetwork.framework in Frameworks */,
 				4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */,
 				4B674E091830B19100C6A98D /* CoreGraphics.framework in Frameworks */,
+				4BE3F25B1832168A000E8DF6 /* Reveal.framework in Frameworks */,
 				4B674E0B1830B19100C6A98D /* UIKit.framework in Frameworks */,
 				4B674E071830B19100C6A98D /* Foundation.framework in Frameworks */,
 			);
@@ -109,6 +115,8 @@
 		4B674E051830B19100C6A98D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BE3F25C18321696000E8DF6 /* CFNetwork.framework */,
+				4BE3F25A1832168A000E8DF6 /* Reveal.framework */,
 				4B674E3E1830B1C300C6A98D /* QuartzCore.framework */,
 				4B674E061830B19100C6A98D /* Foundation.framework */,
 				4B674E081830B19100C6A98D /* CoreGraphics.framework */,
@@ -410,9 +418,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Muukii/Develop/Xcode/iOS/UpperNotificationView,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UpperNotificationView/UpperNotificationView-Prefix.pch";
 				INFOPLIST_FILE = "UpperNotificationView/UpperNotificationView-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -423,9 +436,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Muukii/Develop/Xcode/iOS/UpperNotificationView,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UpperNotificationView/UpperNotificationView-Prefix.pch";
 				INFOPLIST_FILE = "UpperNotificationView/UpperNotificationView-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -492,6 +510,7 @@
 				4B674E3A1830B19200C6A98D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B674E3B1830B19200C6A98D /* Build configuration list for PBXNativeTarget "UpperNotificationViewTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +519,7 @@
 				4B674E3D1830B19200C6A98D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
