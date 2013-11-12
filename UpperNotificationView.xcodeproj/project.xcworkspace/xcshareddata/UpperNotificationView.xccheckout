@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5644571E-43B7-4E5A-A82F-ACE0A3452EF5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>UpperNotificationView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>49ED6ABD-7599-44C2-8FA0-BCD94543B8DF</key>
+		<string>https://github.com/muukii0803/UpperNotificationView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>UpperNotificationView.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>49ED6ABD-7599-44C2-8FA0-BCD94543B8DF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/muukii0803/UpperNotificationView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>49ED6ABD-7599-44C2-8FA0-BCD94543B8DF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>49ED6ABD-7599-44C2-8FA0-BCD94543B8DF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UpperNotificationView</string>
+		</dict>
+	</array>
+</dict>
+</plist>
