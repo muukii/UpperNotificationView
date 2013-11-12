@@ -10,12 +10,106 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationView.m"
-            timestampString = "405937681.746896"
+            timestampString = "405960392.260576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "-setMessage:"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "@implementation UpperNotificationView"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationView.m"
+            timestampString = "405960392.260576"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-tapGestureHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationManager.m"
+            timestampString = "405961404.063378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "+sharedManager"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationManager.m"
+            timestampString = "405961531.523963"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "+sharedManager"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[UpperNotificationManager sharedManager]"
+                  moduleName = "UpperNotificationView"
+                  urlString = "file:///Users/Muukii/Develop/Xcode/iOS/UpperNotificationView/UpperNotificationView/UpperNotificationView/UpperNotificationManager.m"
+                  timestampString = "405961498.090077"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41+[UpperNotificationManager sharedManager]_block_invoke"
+                  moduleName = "UpperNotificationView"
+                  urlString = "file:///Users/Muukii/Develop/Xcode/iOS/UpperNotificationView/UpperNotificationView/UpperNotificationView/UpperNotificationManager.m"
+                  timestampString = "405961498.09023"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "18">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationManager.m"
+            timestampString = "405961531.523963"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "+sharedManager"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

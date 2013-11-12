@@ -24,6 +24,7 @@
 		4B674E351830B19200C6A98D /* UpperNotificationViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E341830B19200C6A98D /* UpperNotificationViewTests.m */; };
 		4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E3E1830B1C300C6A98D /* QuartzCore.framework */; };
 		4B674E481830B26600C6A98D /* UpperNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E471830B26600C6A98D /* UpperNotificationView.m */; };
+		4BBC3EB81832763C006A9089 /* UpperNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC3EB71832763C006A9089 /* UpperNotificationManager.m */; };
 		4BE3F25B1832168A000E8DF6 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE3F25A1832168A000E8DF6 /* Reveal.framework */; };
 		4BE3F25D18321696000E8DF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE3F25C18321696000E8DF6 /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,8 @@
 		4B674E3E1830B1C300C6A98D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4B674E461830B26600C6A98D /* UpperNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpperNotificationView.h; sourceTree = "<group>"; };
 		4B674E471830B26600C6A98D /* UpperNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationView.m; sourceTree = "<group>"; };
+		4BBC3EB61832763C006A9089 /* UpperNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpperNotificationManager.h; sourceTree = "<group>"; };
+		4BBC3EB71832763C006A9089 /* UpperNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationManager.m; sourceTree = "<group>"; };
 		4BE3F25A1832168A000E8DF6 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		4BE3F25C18321696000E8DF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -176,6 +179,8 @@
 			children = (
 				4B674E461830B26600C6A98D /* UpperNotificationView.h */,
 				4B674E471830B26600C6A98D /* UpperNotificationView.m */,
+				4BBC3EB61832763C006A9089 /* UpperNotificationManager.h */,
+				4BBC3EB71832763C006A9089 /* UpperNotificationManager.m */,
 			);
 			path = UpperNotificationView;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				4B674E201830B19100C6A98D /* ViewController.m in Sources */,
 				4B674E171830B19100C6A98D /* AppDelegate.m in Sources */,
 				4B674E481830B26600C6A98D /* UpperNotificationView.m in Sources */,
+				4BBC3EB81832763C006A9089 /* UpperNotificationManager.m in Sources */,
 				4B674E131830B19100C6A98D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

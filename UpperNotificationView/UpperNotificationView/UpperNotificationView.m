@@ -6,58 +6,13 @@
 //  Copyright (c) 2013年 Muukii. All rights reserved.
 //
 
-UIKIT_STATIC_INLINE BOOL
-__isIOS7()
-{
-    NSString *version = [[UIDevice currentDevice] systemVersion];
-    if ([version hasPrefix:@"7"]) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-#define IsIOS7 __isIOS7()
+
 
 #import "UpperNotificationView.h"
-@interface UpperNotificationManager : NSObject
-+ (instancetype)sharedManager;
-@property (nonatomic, retain) NSMutableArray *notifications;
 
-- (void)showInView:(UIView *)view notificationView:(UpperNotificationView *)notificationView;
-
-@end
-
-@implementation UpperNotificationManager
-static id _sharedInstance = nil;
-+ (instancetype)sharedManager
-{
-    if (nil == _sharedInstance) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            _sharedInstance = [[self alloc] init];
-        });
-    }
-    return _sharedInstance;
-}
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        self.notifications = [NSMutableArray array];
-    }
-    return self;
-}
-
-- (void)showInView:(UIView *)view notificationView:(UpperNotificationView *)notificationView
-{
-
-}
-
-@end
+#import "UpperNotificationManager.h"
 
 
-
-#define ANIMATION_DURATION 0.3
 #define SELF_MINIMUM_HEIGHT 44.f
 #define MESSAGE_MARGIN 20.f
 @interface UpperNotificationView ()
@@ -155,13 +110,7 @@ static id _sharedInstance = nil;
 
 - (void)tapGestureHandler:(id)sender
 {
-    if (IsIOS7) {
-        [_dynamicAnimator removeAllBehaviors];
-    }
-    if (_tapHandler) {
-        _tapHandler();
-    }
-    [self dismiss];
+    [[UpperNotificationManager sharedManager] tapHandler:self];
 }
 
 - (void)setMessage:(NSString *)message
@@ -214,89 +163,15 @@ static id _sharedInstance = nil;
 {
     _tapHandler = tapHandler;
 }
+- (TapHandler)tapHandler
+{
+    return _tapHandler;
+}
 - (void)showInView:(UIView *)view
 {
-    UIWindow *window = view.window;
-//    window.windowLevel = UIWindowLevelAlert;
-    NSOperationQueue *queue = [NSOperationQueue mainQueue];
-
-    notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    notificationWindow.windowLevel = UIWindowLevelAlert;
-    [notificationWindow makeKeyAndVisible];
-
-    [queue addOperationWithBlock:^{
-        [[UpperNotificationManager sharedManager].notifications addObject:self];
-
-        if (IsIOS7) {
-            [self.animationView addSubview:self];
-            [notificationWindow addSubview:self.animationView];
-        } else {
-            [view addSubview:self];
-        }
-        [self display];
-
-        double delayInSeconds;
-        if (IsIOS7) {
-            delayInSeconds = 3.f;
-        } else {
-            delayInSeconds = 2.f;
-        }
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self dismiss];
-        });
-
-    }];
+    [[UpperNotificationManager sharedManager] showInView:view notificationView:self];
 }
 
-- (void)display
-{
-
-
-    if (IsIOS7) {
-        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:self.animationView];
-
-        _pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self] mode:UIPushBehaviorModeInstantaneous];
-        [_pushBehavior setPushDirection:CGVectorMake(0, 1)];
-
-        _gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self]];
-        CGFloat magnitude = CGRectGetHeight(self.frame) * 0.01 * 3;
-        [_gravityBehavior setMagnitude:magnitude];
-        _collision = [[UICollisionBehavior alloc]
-                      initWithItems:@[self]];
-        _collision.translatesReferenceBoundsIntoBoundary = YES;
-        [_dynamicAnimator addBehavior:_collision];
-        [_dynamicAnimator addBehavior:_gravityBehavior];
-    } else {
-        CGPoint originPoint = self.center;
-        CGPoint animationPoint = originPoint;
-        animationPoint.y -= CGRectGetHeight(self.frame);
-        self.center = animationPoint;
-        [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            self.center = originPoint;
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-}
-
-- (void)dismiss
-{
-    [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        CGPoint animationPoint = self.center;
-        animationPoint.y -= CGRectGetHeight(self.frame);
-        self.center = animationPoint;
-    } completion:^(BOOL finished) {
-        if (IsIOS7) {
-            [self.animationView removeFromSuperview];
-        } else {
-            [self removeFromSuperview];
-        }
-        NSLog(@"%@",[UpperNotificationManager sharedManager].notifications);
-        [[UpperNotificationManager sharedManager].notifications removeObject:self];
-        notificationWindow = nil;
-    }];
-}
 
 - (void)dealloc
 {

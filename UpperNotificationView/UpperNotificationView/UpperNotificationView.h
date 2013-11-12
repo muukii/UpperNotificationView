@@ -5,6 +5,18 @@
 //  Created by Muukii on 2013/11/11.
 //  Copyright (c) 2013年 Muukii. All rights reserved.
 //
+UIKIT_STATIC_INLINE BOOL
+__isIOS7()
+{
+    NSString *version = [[UIDevice currentDevice] systemVersion];
+    if ([version hasPrefix:@"7"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+#define IsIOS7 __isIOS7()
+
 
 #import <UIKit/UIKit.h>
 
@@ -18,6 +30,7 @@ typedef void(^TapHandler)();
 
 - (void)configureColor;
 - (void)setTapHandler:(TapHandler)tapHandler;
+- (TapHandler)tapHandler;
 
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image;
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
