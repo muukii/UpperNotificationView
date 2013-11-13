@@ -13,6 +13,8 @@
 @property (nonatomic, retain) UIWindow *notificationWindow;
 @property (nonatomic, retain) NSMutableArray *notifications;
 
-- (void)showInView:(UIView *)view notificationView:(UpperNotificationView *)notificationView;
+- (void)showNotificationView:(UpperNotificationView *)notificationView;
+- (void)dismiss:(UpperNotificationView *)notificationView;
 - (void)tapHandler:(UpperNotificationView *)notificationView;
+- (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(UpperNotificationView *)notificationView;
 @end

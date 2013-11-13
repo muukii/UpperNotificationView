@@ -18,6 +18,7 @@
     UICollisionBehavior* _collision;
     UIView *_dynamicAnimationView;
     BOOL showing;
+    BOOL closeAnimate;
 }
 static id _sharedInstance = nil;
 + (instancetype)sharedManager
@@ -32,29 +33,49 @@ static id _sharedInstance = nil;
     self = [super init];
     if (self) {
         _notifications = [NSMutableArray array];
-        _notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+        _notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, -1, 320, 64)];
         _dynamicAnimationView = [UIView new];
     }
     return self;
 }
 
-- (void)showInView:(UIView *)view notificationView:(UpperNotificationView *)notificationView
+- (void)showNotificationView:(UpperNotificationView *)notificationView
 {
     [_notifications addObject:notificationView];
     [self display];
-
-    }
+}
 - (void)tapHandler:(UpperNotificationView *)notificationView
 {
-    if (IsIOS7) {
-        [_dynamicAnimator removeAllBehaviors];
-    }
     if (notificationView.tapHandler) {
         notificationView.tapHandler();
     }
     [self dismiss:notificationView];
 }
+- (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(UpperNotificationView *)notificationView
+{
+    if (IsIOS7) {
+        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
+        [_dynamicAnimator removeAllBehaviors];
+    }
 
+    UIPanGestureRecognizer *panGesture = (UIPanGestureRecognizer *)gesture;
+
+    CGPoint p = [panGesture translationInView:notificationView.superview];
+    CGPoint movedPoint = CGPointMake(notificationView.center.x, notificationView.center.y + p.y);
+    if (CGRectGetHeight(notificationView.superview.frame) - (CGRectGetHeight(notificationView.frame)/2) <= movedPoint.y) {
+        return;
+    }
+    notificationView.center = movedPoint;
+
+    [panGesture setTranslation:CGPointZero inView:notificationView.superview];
+
+    if (panGesture.state == UIGestureRecognizerStateEnded || panGesture.state == UIGestureRecognizerStateCancelled || panGesture.state == UIGestureRecognizerStateFailed) {
+        NSLog(@"%f %f",CGRectGetHeight(notificationView.superview.frame) - CGRectGetHeight(notificationView.frame),CGRectGetMinY(notificationView.frame));
+        if (CGRectGetHeight(notificationView.superview.frame) - CGRectGetHeight(notificationView.frame) > CGRectGetMinY(notificationView.frame)) {
+            [[UpperNotificationManager sharedManager] dismiss:notificationView];
+        }
+    }
+}
 - (void)displayDynamicAnimation
 {
 
@@ -63,8 +84,13 @@ static id _sharedInstance = nil;
 - (void)display
 {
     if (!_notifications.count) {
-        _sharedInstance = nil;
-
+        double delayInSeconds = 10.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            if (!_notifications.count) {
+                _sharedInstance = nil;
+            }
+        });
         return;
     }
     if (showing) {
@@ -122,6 +148,17 @@ static id _sharedInstance = nil;
 }
 - (void)dismiss:(UpperNotificationView *)notificationView
 {
+    if (IsIOS7) {
+        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
+        [_dynamicAnimator removeAllBehaviors];
+    }
+    if (closeAnimate) {
+        return;
+    } else {
+        closeAnimate = YES;
+    }
+    closeAnimate = YES;
+    NSLog(@"animation");
     [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         CGPoint animationPoint = notificationView.center;
         animationPoint.y -= CGRectGetHeight(notificationView.frame);
@@ -130,6 +167,7 @@ static id _sharedInstance = nil;
         [self.notifications removeObject:notificationView];
         [notificationView removeFromSuperview];
         showing = NO;
+        closeAnimate = NO;
         [self display];
     }];
 }

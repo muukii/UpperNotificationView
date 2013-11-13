@@ -37,7 +37,7 @@ typedef void(^TapHandler)();
 
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image;
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
-- (void)showInView:(UIView *)view;
+- (void)show;
 
 @end
 

@@ -13,10 +13,9 @@
 #import "UpperNotificationManager.h"
 
 
-#define SELF_MINIMUM_HEIGHT 44.f
+#define SELF_MINIMUM_HEIGHT 64.f
 #define MESSAGE_MARGIN 20.f
-@interface UpperNotificationView ()
-@property (nonatomic, retain) UIView *animationView;
+@interface UpperNotificationView () <UIGestureRecognizerDelegate>
 @end
 @implementation UpperNotificationView
 {
@@ -70,19 +69,18 @@
 
 - (void)configureView
 {
-    statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//    statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    statusBarHeight = 0;
 
-    self.animationView = [[UIView alloc] initWithFrame:CGRectMake(0, -600, 320, 600)];
-    self.animationView.opaque = NO;
-    self.animationView.backgroundColor = [UIColor clearColor];
-
-    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, 270 , 0)];
+    CGFloat messageLabelX = 64;
+    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(messageLabelX, 0, 320 - messageLabelX - 10 , 64)];
     self.messageLabel.backgroundColor = [UIColor clearColor];
-    self.messageLabel.numberOfLines = 0;
+    self.messageLabel.numberOfLines = 3;
+    [self.messageLabel setFont:[UIFont systemFontOfSize:14]];
     [self.messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
 
 
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
     self.imageView.contentMode = UIViewContentModeCenter;
 
 
@@ -104,8 +102,21 @@
 
 - (void)setGesture
 {
+//    UISwipeGestureRecognizer* swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUpGestureHandler:)];
+//    swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+//    swipeUpGesture.delegate = self;
+//    [self addGestureRecognizer:swipeUpGesture];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
+    tapGesture.delegate = self;
     [self addGestureRecognizer:tapGesture];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
+    [self addGestureRecognizer:panGesture];
+
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
 }
 
 - (void)tapGestureHandler:(id)sender
@@ -113,44 +124,49 @@
     [[UpperNotificationManager sharedManager] tapHandler:self];
 }
 
+- (void)panGestureHandler:(id)sender
+{
+    [[UpperNotificationManager sharedManager] panGestureHandler:sender notificationView:self];
+}
+- (void)swipeUpGestureHandler:(id)sender
+{
+    [[UpperNotificationManager sharedManager] dismiss:self];
+
+}
+
 - (void)setMessage:(NSString *)message
 {
 
     _message = message;
 
-    CGSize size;
-    CGSize cropSize = CGSizeMake(CGRectGetWidth(self.messageLabel.frame), 1000);
-    if (IsIOS7) {
-        size = [message boundingRectWithSize:cropSize options:
-                   NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
-                                     attributes:@{NSFontAttributeName:self.messageLabel.font} context:nil].size;
-    } else {
-        size = [message sizeWithFont:self.messageLabel.font constrainedToSize:cropSize lineBreakMode:NSLineBreakByWordWrapping];
-    }
-
-
-    NSLog(@"%@",NSStringFromCGSize(size));
-
-    size.height += MESSAGE_MARGIN + statusBarHeight;
-    if (size.height > SELF_MINIMUM_HEIGHT - MESSAGE_MARGIN) {
-        CGRect messageLabelRect = self.messageLabel.frame;
-        messageLabelRect.size = size;
-        self.messageLabel.frame = messageLabelRect;
-
-        CGRect selfRect = self.frame;
-        selfRect.size.height = size.height;
-        self.frame = selfRect;
-
-        CGPoint messageLabelCenter = self.messageLabel.center;
-        messageLabelCenter.y = CGRectGetMidY(self.frame) + statusBarHeight/2;
-        self.messageLabel.center = messageLabelCenter;
-
-        if (IsIOS7) {
-            CGRect animationViewRect = self.animationView.frame;
-            animationViewRect.origin.y += self.frame.size.height;
-            self.animationView.frame = animationViewRect;
-        }
-    }
+//    CGSize size;
+//    CGSize cropSize = CGSizeMake(CGRectGetWidth(self.messageLabel.frame), 1000);
+//    if (IsIOS7) {
+//        size = [message boundingRectWithSize:cropSize options:
+//                   NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+//                                     attributes:@{NSFontAttributeName:self.messageLabel.font} context:nil].size;
+//    } else {
+//        size = [message sizeWithFont:self.messageLabel.font constrainedToSize:cropSize lineBreakMode:NSLineBreakByWordWrapping];
+//    }
+//
+//
+//    NSLog(@"%@",NSStringFromCGSize(size));
+//
+//    size.height += MESSAGE_MARGIN + statusBarHeight;
+//    if (size.height > SELF_MINIMUM_HEIGHT - MESSAGE_MARGIN) {
+//        CGRect messageLabelRect = self.messageLabel.frame;
+//        messageLabelRect.size = size;
+//        self.messageLabel.frame = messageLabelRect;
+//
+//        CGRect selfRect = self.frame;
+//        selfRect.size.height = size.height;
+//        self.frame = selfRect;
+//
+//        CGPoint messageLabelCenter = self.messageLabel.center;
+//        messageLabelCenter.y = CGRectGetMidY(self.frame) + statusBarHeight/2;
+//        self.messageLabel.center = messageLabelCenter;
+//
+//    }
     self.messageLabel.text = message;
 }
 
@@ -167,9 +183,9 @@
 {
     return _tapHandler;
 }
-- (void)showInView:(UIView *)view
+- (void)show
 {
-    [[UpperNotificationManager sharedManager] showInView:view notificationView:self];
+    [[UpperNotificationManager sharedManager] showNotificationView:self];
 }
 
 
@@ -185,7 +201,7 @@
 
 - (void)configureColor
 {
-    self.backgroundColor = [UIColor colorWithRed:0.851 green:0.682 blue:0.188 alpha:0.500];
+    self.backgroundColor = [UIColor colorWithRed:0.000 green:0.643 blue:0.878 alpha:0.900];
     self.messageLabel.textColor = [UIColor whiteColor];
 
 }
@@ -196,7 +212,7 @@
 
 - (void)configureColor
 {
-    self.backgroundColor = [UIColor colorWithRed:0.337 green:0.569 blue:0.384 alpha:0.500];
+    self.backgroundColor = [UIColor colorWithRed:0.851 green:0.839 blue:0.235 alpha:0.900];
     self.messageLabel.textColor = [UIColor whiteColor];
 
 }
@@ -206,7 +222,7 @@
 @implementation UpperNotificationFaiureView
 - (void)configureColor
 {
-    self.backgroundColor = [UIColor colorWithRed:0.469 green:0.426 blue:0.770 alpha:0.500];
+    self.backgroundColor = [UIColor colorWithRed:0.761 green:0.278 blue:0.016 alpha:0.900];
     self.messageLabel.textColor = [UIColor whiteColor];
 }
 

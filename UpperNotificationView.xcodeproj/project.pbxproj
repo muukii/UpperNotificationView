@@ -25,6 +25,7 @@
 		4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E3E1830B1C300C6A98D /* QuartzCore.framework */; };
 		4B674E481830B26600C6A98D /* UpperNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B674E471830B26600C6A98D /* UpperNotificationView.m */; };
 		4BBC3EB81832763C006A9089 /* UpperNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC3EB71832763C006A9089 /* UpperNotificationManager.m */; };
+		4BBC3ECE18335940006A9089 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BBC3ECD18335940006A9089 /* icon@2x.png */; };
 		4BE3F25B1832168A000E8DF6 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE3F25A1832168A000E8DF6 /* Reveal.framework */; };
 		4BE3F25D18321696000E8DF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE3F25C18321696000E8DF6 /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		4B674E471830B26600C6A98D /* UpperNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationView.m; sourceTree = "<group>"; };
 		4BBC3EB61832763C006A9089 /* UpperNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpperNotificationManager.h; sourceTree = "<group>"; };
 		4BBC3EB71832763C006A9089 /* UpperNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperNotificationManager.m; sourceTree = "<group>"; };
+		4BBC3ECD18335940006A9089 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		4BE3F25A1832168A000E8DF6 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		4BE3F25C18321696000E8DF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -139,6 +141,7 @@
 				4B674E1B1830B19100C6A98D /* Main_iPad.storyboard */,
 				4B674E1E1830B19100C6A98D /* ViewController.h */,
 				4B674E1F1830B19100C6A98D /* ViewController.m */,
+				4BBC3ECD18335940006A9089 /* icon@2x.png */,
 				4B674E211830B19100C6A98D /* Images.xcassets */,
 				4B674E0D1830B19100C6A98D /* Supporting Files */,
 			);
@@ -264,6 +267,7 @@
 				4B674E1D1830B19100C6A98D /* Main_iPad.storyboard in Resources */,
 				4B674E221830B19100C6A98D /* Images.xcassets in Resources */,
 				4B674E1A1830B19100C6A98D /* Main_iPhone.storyboard in Resources */,
+				4BBC3ECE18335940006A9089 /* icon@2x.png in Resources */,
 				4B674E111830B19100C6A98D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

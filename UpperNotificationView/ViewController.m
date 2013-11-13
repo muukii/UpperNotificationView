@@ -34,19 +34,24 @@
     UpperNotificationFaiureView *notification = [UpperNotificationFaiureView notificationWithMessage:@"hellohellohellohellohellohellohellohellohellohellohellohellohello" image:nil tapHandler:^{
         NSLog(@"hellow");
     }];
-    [notification showInView:self.view];
+    notification.image = [UIImage imageNamed:@"icon"];
+
+    [notification show];
 }
 - (IBAction)caution:(id)sender {
     UpperNotificationCautionView *notification = [UpperNotificationCautionView notificationWithMessage:@"hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello" image:nil tapHandler:^{
         
     }];
-    [notification showInView:self.view];
+    notification.image = [UIImage imageNamed:@"icon"];
+    [notification show];
 }
 - (IBAction)success:(id)sender {
     UpperNotificationSuccessView *notification = [UpperNotificationSuccessView notificationWithMessage:@"hellohellohellohellohello" image:nil tapHandler:^{
         NSLog(@"hellow");
     }];
-    [notification showInView:self.view];
+    notification.image = [UIImage imageNamed:@"icon"];
+
+    [notification show];
 }
 
 @end
