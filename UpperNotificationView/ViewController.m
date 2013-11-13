@@ -31,26 +31,21 @@
 //    UpperNotificationView *notificationView = [[UpperNotificationView alloc] initWithMessage:@"hello" image:nil];
 //    [notificationView showInView:self.view];
 
-    UpperNotificationFaiureView *notification = [UpperNotificationFaiureView notificationWithMessage:@"hellohellohellohellohellohellohellohellohellohellohellohellohello" image:nil tapHandler:^{
+    UpperNotificationFaiureView *notification = [UpperNotificationFaiureView notificationWithMessage:@"Good Morning!" image:nil tapHandler:^{
         NSLog(@"hellow");
     }];
-    notification.image = [UIImage imageNamed:@"icon"];
-
     [notification show];
 }
 - (IBAction)caution:(id)sender {
-    UpperNotificationCautionView *notification = [UpperNotificationCautionView notificationWithMessage:@"hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello" image:nil tapHandler:^{
-        
+    UpperNotificationCautionView *notification = [UpperNotificationCautionView notificationWithMessage:@"Caution!!! Caution!!! Caution!!! Caution!!! " image:nil tapHandler:^{
+        NSLog(@"hellow");
     }];
-    notification.image = [UIImage imageNamed:@"icon"];
     [notification show];
 }
 - (IBAction)success:(id)sender {
-    UpperNotificationSuccessView *notification = [UpperNotificationSuccessView notificationWithMessage:@"hellohellohellohellohello" image:nil tapHandler:^{
+    UpperNotificationSuccessView *notification = [UpperNotificationSuccessView notificationWithMessage:@"Success!!! Success!!! Success!!! Success!!! Success!!! Success!!! Success!!! Success!!! Success!!! " image:nil tapHandler:^{
         NSLog(@"hellow");
     }];
-    notification.image = [UIImage imageNamed:@"icon"];
-
     [notification show];
 }
 

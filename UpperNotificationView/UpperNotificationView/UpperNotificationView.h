@@ -27,19 +27,20 @@ typedef void(^TapHandler)();
 @property (nonatomic, retain) UILabel *messageLabel;
 @property (nonatomic, copy) NSString *message;
 @property (nonatomic, copy) UIImage *image;
-
-- (void)configureColor;
+- (void)configureColor; // Please, Override this method when make subclass.
 - (void)setTapHandler:(TapHandler)tapHandler;
 - (TapHandler)tapHandler;
 
++ (instancetype)notification;
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image;
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
 
+- (instancetype)initNotification;
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image;
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
 - (void)show;
-
 @end
+
 
 @interface UpperNotificationCautionView : UpperNotificationView
 

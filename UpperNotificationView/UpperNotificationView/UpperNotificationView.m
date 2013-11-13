@@ -13,7 +13,7 @@
 #import "UpperNotificationManager.h"
 
 
-#define SELF_MINIMUM_HEIGHT 64.f
+#define SELF_MINIMUM_HEIGHT 65.f
 #define MESSAGE_MARGIN 20.f
 @interface UpperNotificationView () <UIGestureRecognizerDelegate>
 @end
@@ -26,6 +26,11 @@
     UICollisionBehavior* _collision;
     CGFloat statusBarHeight;
     UIWindow *notificationWindow;
+}
++ (instancetype)notification
+{
+    UpperNotificationView *notificationView = [[self alloc] initWithMessage:nil image:nil];
+    return notificationView;
 }
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image
 {
@@ -45,6 +50,11 @@
     }
     return self;
 }
+- (instancetype)initNotification
+{
+    return [self initWithMessage:nil image:nil];
+}
+
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image
 {
     return [self initWithMessage:message image:image tapHandler:NULL];
@@ -61,8 +71,12 @@
             [self configureDynamicAnimation];
         }
         [self setGesture];
-        [self setMessage:message];
-        [self setImage:image];
+        if (message) {
+            [self setMessage:message];
+        }
+        if (image) {
+            [self setImage:image];
+        }
     }
     return self;
 }
@@ -203,7 +217,7 @@
 {
     self.backgroundColor = [UIColor colorWithRed:0.000 green:0.643 blue:0.878 alpha:0.900];
     self.messageLabel.textColor = [UIColor whiteColor];
-
+    self.image = [UIImage imageNamed:@"icon"];
 }
 
 @end
@@ -214,6 +228,7 @@
 {
     self.backgroundColor = [UIColor colorWithRed:0.851 green:0.839 blue:0.235 alpha:0.900];
     self.messageLabel.textColor = [UIColor whiteColor];
+    self.image = [UIImage imageNamed:@"icon"];
 
 }
 
@@ -224,6 +239,8 @@
 {
     self.backgroundColor = [UIColor colorWithRed:0.761 green:0.278 blue:0.016 alpha:0.900];
     self.messageLabel.textColor = [UIColor whiteColor];
+    self.image = [UIImage imageNamed:@"icon"];
+
 }
 
 @end

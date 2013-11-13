@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationView.m"
-            timestampString = "406018196.76702"
+            timestampString = "406023663.506988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "@implementation UpperNotificationView"
             landmarkType = "3">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationView.m"
-            timestampString = "406020590.682712"
+            timestampString = "406023663.506988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-panGestureHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationView.m"
-            timestampString = "406020590.682712"
+            timestampString = "406023663.506988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "-tapGestureHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -158,6 +158,22 @@
             startingLineNumber = "49"
             endingLineNumber = "49"
             landmarkName = "-tapHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpperNotificationView/UpperNotificationView/UpperNotificationView.m"
+            timestampString = "406023663.506988"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "-configureColor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
