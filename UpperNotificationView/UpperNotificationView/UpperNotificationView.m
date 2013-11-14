@@ -215,7 +215,7 @@
 
 - (void)configureColor
 {
-    self.backgroundColor = [UIColor colorWithRed:0.000 green:0.643 blue:0.878 alpha:0.900];
+    self.backgroundColor = [UIColor colorWithRed:0.000 green:0.643 blue:0.878 alpha:0.950];
     self.messageLabel.textColor = [UIColor whiteColor];
     self.image = [UIImage imageNamed:@"icon"];
 }
@@ -226,7 +226,7 @@
 
 - (void)configureColor
 {
-    self.backgroundColor = [UIColor colorWithRed:0.851 green:0.839 blue:0.235 alpha:0.900];
+    self.backgroundColor = [UIColor colorWithRed:0.851 green:0.839 blue:0.235 alpha:0.950];
     self.messageLabel.textColor = [UIColor whiteColor];
     self.image = [UIImage imageNamed:@"icon"];
 
@@ -237,7 +237,7 @@
 @implementation UpperNotificationFaiureView
 - (void)configureColor
 {
-    self.backgroundColor = [UIColor colorWithRed:0.761 green:0.278 blue:0.016 alpha:0.900];
+    self.backgroundColor = [UIColor colorWithRed:0.761 green:0.278 blue:0.016 alpha:0.950];
     self.messageLabel.textColor = [UIColor whiteColor];
     self.image = [UIImage imageNamed:@"icon"];
 
