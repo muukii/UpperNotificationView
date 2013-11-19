@@ -27,6 +27,10 @@ typedef void(^TapHandler)();
 @property (nonatomic, retain) UILabel *messageLabel;
 @property (nonatomic, copy) NSString *message;
 @property (nonatomic, copy) UIImage *image;
+
+@property (nonatomic, copy) UIColor *backgroundViewColor;
+@property (nonatomic, copy) UIColor *messageTextColor;
+
 - (void)configureColor; // Please, Override this method when make subclass.
 - (void)setTapHandler:(TapHandler)tapHandler;
 - (TapHandler)tapHandler;

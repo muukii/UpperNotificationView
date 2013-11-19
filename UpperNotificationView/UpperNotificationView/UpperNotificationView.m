@@ -102,11 +102,20 @@
     [self addSubview:self.imageView];
 
 }
-
+- (void)setBackgroundViewColor:(UIColor *)backgroundViewColor
+{
+    _backgroundViewColor = backgroundViewColor;
+    [self setBackgroundColor:backgroundViewColor];
+}
+- (void)setMessageTextColor:(UIColor *)messageTextColor
+{
+    _messageTextColor = messageTextColor;
+    [self setMessageTextColor:messageTextColor];
+}
 - (void)configureColor
 {
-    [self setBackgroundColor:[UIColor colorWithWhite:0.000 alpha:0.500]];
-    self.messageLabel.textColor = [UIColor whiteColor];
+    self.backgroundViewColor = [UIColor colorWithWhite:0.000 alpha:0.500];
+    self.messageTextColor = [UIColor whiteColor];
 }
 
 - (void)configureDynamicAnimation
