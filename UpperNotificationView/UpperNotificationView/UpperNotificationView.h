@@ -31,6 +31,7 @@ typedef void(^TapHandler)();
 @property (nonatomic, copy) UIColor *backgroundViewColor;
 @property (nonatomic, copy) UIColor *messageTextColor;
 
+- (void)configureView; // Super Call When Override.
 - (void)configureColor; // Please, Override this method when make subclass.
 - (void)setTapHandler:(TapHandler)tapHandler;
 - (TapHandler)tapHandler;

@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
             endingLineNumber = "107"
-            landmarkName = "-setBackgroundColor:"
+            landmarkName = "-setBackgroundViewColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
