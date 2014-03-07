@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <UIKit/UIKit.h>
+
 NS_INLINE BOOL
 __OSVersionNumberAtLeast_iOS_7_0() {
     return (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1);
 }
 #define OSVersionNumberAtLeast_iOS_7_0 (__OSVersionNumberAtLeast_iOS_7_0())
-
-#import <UIKit/UIKit.h>
 
 typedef void(^TapHandler)();
 

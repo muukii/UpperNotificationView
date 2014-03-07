@@ -24,13 +24,12 @@
 
 #import "MMMUpperNotificationManager.h"
 
+static const CGFloat kMMMUpperNotificationViewHeight = 65.;
 
-#define SELF_MINIMUM_HEIGHT 65.f
-#define MESSAGE_MARGIN 20.f
 @interface MMMUpperNotificationView () <UIGestureRecognizerDelegate>
 @end
-@implementation MMMUpperNotificationView
-{
+
+@implementation MMMUpperNotificationView {
     TapHandler _tapHandler;
     UIDynamicAnimator *_dynamicAnimator;
     UIPushBehavior *_pushBehavior;
@@ -39,29 +38,29 @@
     CGFloat statusBarHeight;
     UIWindow *notificationWindow;
 }
+
+#pragma mark - MMMUpperNotificationView useful methods
+
 + (instancetype)notification
 {
     MMMUpperNotificationView *notificationView = [[self alloc] initWithMessage:nil image:nil];
     return notificationView;
 }
+
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image
 {
     MMMUpperNotificationView *notificationView = [[self alloc] initWithMessage:message image:image];
     return notificationView;
 }
 
-+ (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler{
++ (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler
+{
     MMMUpperNotificationView *notificationView = [[self alloc] initWithMessage:message image:image tapHandler:tapHandler];
     return notificationView;
 }
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
+
+#pragma mark - MMMUpperNotificationView initializing methods
+
 - (instancetype)initNotification
 {
     return [self initWithMessage:nil image:nil];
@@ -73,7 +72,7 @@
 }
 - (instancetype)initWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler
 {
-    CGRect rect = CGRectMake(0, 0, 320, SELF_MINIMUM_HEIGHT);
+    CGRect rect = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), kMMMUpperNotificationViewHeight);
     self = [self initWithFrame:rect];
     if (self) {
         [self setTapHandler:tapHandler];
