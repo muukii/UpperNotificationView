@@ -94,10 +94,10 @@
 		799E7BC018CA08ED00BBC57D /* MMMUpperNotificationView */ = {
 			isa = PBXGroup;
 			children = (
-				799E7BC118CA08ED00BBC57D /* MMMUpperNotificationManager.h */,
-				799E7BC218CA08ED00BBC57D /* MMMUpperNotificationManager.m */,
 				799E7BC318CA08ED00BBC57D /* MMMUpperNotificationView.h */,
 				799E7BC418CA08ED00BBC57D /* MMMUpperNotificationView.m */,
+				799E7BC118CA08ED00BBC57D /* MMMUpperNotificationManager.h */,
+				799E7BC218CA08ED00BBC57D /* MMMUpperNotificationManager.m */,
 			);
 			path = MMMUpperNotificationView;
 			sourceTree = "<group>";

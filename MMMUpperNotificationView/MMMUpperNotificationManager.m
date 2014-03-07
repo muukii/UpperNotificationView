@@ -68,7 +68,7 @@ static id _sharedInstance = nil;
 }
 - (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(MMMUpperNotificationView *)notificationView
 {
-    if (IsIOS7) {
+    if (OSVersionNumberAtLeast_iOS_7_0) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
         [_dynamicAnimator removeAllBehaviors];
     }
@@ -118,7 +118,7 @@ static id _sharedInstance = nil;
 
     MMMUpperNotificationView *showNotification = _notifications.firstObject;
     NSLog(@"%@",_notifications);
-    if (IsIOS7) {
+    if (OSVersionNumberAtLeast_iOS_7_0) {
         CGFloat hiddenHeight = 600;
 
         _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
@@ -165,7 +165,7 @@ static id _sharedInstance = nil;
 }
 - (void)displayAgain:(MMMUpperNotificationView *)showNotification
 {
-    if (IsIOS7) {
+    if (OSVersionNumberAtLeast_iOS_7_0) {
         CGFloat hiddenHeight = 600;
 
         _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
@@ -205,7 +205,7 @@ static id _sharedInstance = nil;
 }
 - (void)dismiss:(MMMUpperNotificationView *)notificationView
 {
-    if (IsIOS7) {
+    if (OSVersionNumberAtLeast_iOS_7_0) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
         [_dynamicAnimator removeAllBehaviors];
     }

@@ -79,7 +79,7 @@
         [self setTapHandler:tapHandler];
         [self configureView];
         [self configureColor];
-        if (IsIOS7) {
+        if (OSVersionNumberAtLeast_iOS_7_0) {
             [self configureDynamicAnimation];
         }
         [self setGesture];

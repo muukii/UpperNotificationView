@@ -20,18 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-UIKIT_STATIC_INLINE BOOL
-__isIOS7()
-{
-    NSString *version = [[UIDevice currentDevice] systemVersion];
-    if ([version hasPrefix:@"7"]) {
-        return YES;
-    } else {
-        return NO;
-    }
+NS_INLINE BOOL
+__OSVersionNumberAtLeast_iOS_7_0() {
+    return (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1);
 }
-#define IsIOS7 __isIOS7()
-
+#define OSVersionNumberAtLeast_iOS_7_0 (__OSVersionNumberAtLeast_iOS_7_0())
 
 #import <UIKit/UIKit.h>
 
