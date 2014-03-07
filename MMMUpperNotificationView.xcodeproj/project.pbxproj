@@ -1,0 +1,368 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B674E071830B19100C6A98D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E061830B19100C6A98D /* Foundation.framework */; };
+		4B674E091830B19100C6A98D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E081830B19100C6A98D /* CoreGraphics.framework */; };
+		4B674E0B1830B19100C6A98D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E0A1830B19100C6A98D /* UIKit.framework */; };
+		4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B674E3E1830B1C300C6A98D /* QuartzCore.framework */; };
+		799E7BC518CA08ED00BBC57D /* MMMUpperNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BC218CA08ED00BBC57D /* MMMUpperNotificationManager.m */; };
+		799E7BC618CA08ED00BBC57D /* MMMUpperNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BC418CA08ED00BBC57D /* MMMUpperNotificationView.m */; };
+		799E7BD718CA08FD00BBC57D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BC918CA08FD00BBC57D /* AppDelegate.m */; };
+		799E7BD818CA08FD00BBC57D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799E7BCA18CA08FD00BBC57D /* Main_iPad.storyboard */; };
+		799E7BD918CA08FD00BBC57D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799E7BCC18CA08FD00BBC57D /* Main_iPhone.storyboard */; };
+		799E7BDA18CA08FD00BBC57D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 799E7BCE18CA08FD00BBC57D /* InfoPlist.strings */; };
+		799E7BDB18CA08FD00BBC57D /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 799E7BD018CA08FD00BBC57D /* icon@2x.png */; };
+		799E7BDC18CA08FD00BBC57D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799E7BD118CA08FD00BBC57D /* Images.xcassets */; };
+		799E7BDD18CA08FD00BBC57D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BD218CA08FD00BBC57D /* main.m */; };
+		799E7BDF18CA08FD00BBC57D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BD618CA08FD00BBC57D /* ViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4B674E031830B19100C6A98D /* MMMUpperNotificationView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMMUpperNotificationView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B674E061830B19100C6A98D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4B674E081830B19100C6A98D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4B674E0A1830B19100C6A98D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4B674E3E1830B1C300C6A98D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		799E7BC118CA08ED00BBC57D /* MMMUpperNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMUpperNotificationManager.h; sourceTree = "<group>"; };
+		799E7BC218CA08ED00BBC57D /* MMMUpperNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMUpperNotificationManager.m; sourceTree = "<group>"; };
+		799E7BC318CA08ED00BBC57D /* MMMUpperNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMUpperNotificationView.h; sourceTree = "<group>"; };
+		799E7BC418CA08ED00BBC57D /* MMMUpperNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMUpperNotificationView.m; sourceTree = "<group>"; };
+		799E7BC818CA08FD00BBC57D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		799E7BC918CA08FD00BBC57D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		799E7BCB18CA08FD00BBC57D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		799E7BCD18CA08FD00BBC57D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		799E7BCF18CA08FD00BBC57D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		799E7BD018CA08FD00BBC57D /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		799E7BD118CA08FD00BBC57D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		799E7BD218CA08FD00BBC57D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		799E7BD318CA08FD00BBC57D /* UpperNotificationView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UpperNotificationView-Info.plist"; sourceTree = "<group>"; };
+		799E7BD418CA08FD00BBC57D /* UpperNotificationView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UpperNotificationView-Prefix.pch"; sourceTree = "<group>"; };
+		799E7BD518CA08FD00BBC57D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		799E7BD618CA08FD00BBC57D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4B674E001830B19100C6A98D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B674E3F1830B1C300C6A98D /* QuartzCore.framework in Frameworks */,
+				4B674E091830B19100C6A98D /* CoreGraphics.framework in Frameworks */,
+				4B674E0B1830B19100C6A98D /* UIKit.framework in Frameworks */,
+				4B674E071830B19100C6A98D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4B674DFA1830B19100C6A98D = {
+			isa = PBXGroup;
+			children = (
+				799E7BC718CA08FD00BBC57D /* MMMUpperNotificationView-example */,
+				799E7BC018CA08ED00BBC57D /* MMMUpperNotificationView */,
+				4B674E051830B19100C6A98D /* Frameworks */,
+				4B674E041830B19100C6A98D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4B674E041830B19100C6A98D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B674E031830B19100C6A98D /* MMMUpperNotificationView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B674E051830B19100C6A98D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B674E3E1830B1C300C6A98D /* QuartzCore.framework */,
+				4B674E061830B19100C6A98D /* Foundation.framework */,
+				4B674E081830B19100C6A98D /* CoreGraphics.framework */,
+				4B674E0A1830B19100C6A98D /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		799E7BC018CA08ED00BBC57D /* MMMUpperNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				799E7BC118CA08ED00BBC57D /* MMMUpperNotificationManager.h */,
+				799E7BC218CA08ED00BBC57D /* MMMUpperNotificationManager.m */,
+				799E7BC318CA08ED00BBC57D /* MMMUpperNotificationView.h */,
+				799E7BC418CA08ED00BBC57D /* MMMUpperNotificationView.m */,
+			);
+			path = MMMUpperNotificationView;
+			sourceTree = "<group>";
+		};
+		799E7BC718CA08FD00BBC57D /* MMMUpperNotificationView-example */ = {
+			isa = PBXGroup;
+			children = (
+				799E7BC818CA08FD00BBC57D /* AppDelegate.h */,
+				799E7BC918CA08FD00BBC57D /* AppDelegate.m */,
+				799E7BCA18CA08FD00BBC57D /* Main_iPad.storyboard */,
+				799E7BCC18CA08FD00BBC57D /* Main_iPhone.storyboard */,
+				799E7BD018CA08FD00BBC57D /* icon@2x.png */,
+				799E7BD118CA08FD00BBC57D /* Images.xcassets */,
+				799E7BD518CA08FD00BBC57D /* ViewController.h */,
+				799E7BD618CA08FD00BBC57D /* ViewController.m */,
+				799E7BE018CA0C1D00BBC57D /* Supporting Files */,
+			);
+			path = "MMMUpperNotificationView-example";
+			sourceTree = "<group>";
+		};
+		799E7BE018CA0C1D00BBC57D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				799E7BD318CA08FD00BBC57D /* UpperNotificationView-Info.plist */,
+				799E7BCE18CA08FD00BBC57D /* InfoPlist.strings */,
+				799E7BD218CA08FD00BBC57D /* main.m */,
+				799E7BD418CA08FD00BBC57D /* UpperNotificationView-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4B674E021830B19100C6A98D /* MMMUpperNotificationView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B674E381830B19200C6A98D /* Build configuration list for PBXNativeTarget "MMMUpperNotificationView" */;
+			buildPhases = (
+				4B674DFF1830B19100C6A98D /* Sources */,
+				4B674E001830B19100C6A98D /* Frameworks */,
+				4B674E011830B19100C6A98D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MMMUpperNotificationView;
+			productName = UpperNotificationView;
+			productReference = 4B674E031830B19100C6A98D /* MMMUpperNotificationView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4B674DFB1830B19100C6A98D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MMM;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Muukii;
+			};
+			buildConfigurationList = 4B674DFE1830B19100C6A98D /* Build configuration list for PBXProject "MMMUpperNotificationView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4B674DFA1830B19100C6A98D;
+			productRefGroup = 4B674E041830B19100C6A98D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4B674E021830B19100C6A98D /* MMMUpperNotificationView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4B674E011830B19100C6A98D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				799E7BD918CA08FD00BBC57D /* Main_iPhone.storyboard in Resources */,
+				799E7BDC18CA08FD00BBC57D /* Images.xcassets in Resources */,
+				799E7BDB18CA08FD00BBC57D /* icon@2x.png in Resources */,
+				799E7BDA18CA08FD00BBC57D /* InfoPlist.strings in Resources */,
+				799E7BD818CA08FD00BBC57D /* Main_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B674DFF1830B19100C6A98D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				799E7BC518CA08ED00BBC57D /* MMMUpperNotificationManager.m in Sources */,
+				799E7BC618CA08ED00BBC57D /* MMMUpperNotificationView.m in Sources */,
+				799E7BDD18CA08FD00BBC57D /* main.m in Sources */,
+				799E7BD718CA08FD00BBC57D /* AppDelegate.m in Sources */,
+				799E7BDF18CA08FD00BBC57D /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		799E7BCA18CA08FD00BBC57D /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				799E7BCB18CA08FD00BBC57D /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		799E7BCC18CA08FD00BBC57D /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				799E7BCD18CA08FD00BBC57D /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		799E7BCE18CA08FD00BBC57D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				799E7BCF18CA08FD00BBC57D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4B674E361830B19200C6A98D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4B674E371830B19200C6A98D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4B674E391830B19200C6A98D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MMMUpperNotificationView-example/UpperNotificationView-Prefix.pch";
+				INFOPLIST_FILE = "MMMUpperNotificationView-example/UpperNotificationView-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4B674E3A1830B19200C6A98D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MMMUpperNotificationView-example/UpperNotificationView-Prefix.pch";
+				INFOPLIST_FILE = "MMMUpperNotificationView-example/UpperNotificationView-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4B674DFE1830B19100C6A98D /* Build configuration list for PBXProject "MMMUpperNotificationView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B674E361830B19200C6A98D /* Debug */,
+				4B674E371830B19200C6A98D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B674E381830B19200C6A98D /* Build configuration list for PBXNativeTarget "MMMUpperNotificationView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B674E391830B19200C6A98D /* Debug */,
+				4B674E3A1830B19200C6A98D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4B674DFB1830B19100C6A98D /* Project object */;
+}

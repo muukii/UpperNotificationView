@@ -1,4 +1,4 @@
-// UpperNotificationView.m
+// MMMUpperNotificationView.m
 //
 // Copyright (c) 2014 Muukii (http://www.muukii.me)
 //
@@ -20,16 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "UpperNotificationView.h"
+#import "MMMUpperNotificationView.h"
 
-#import "UpperNotificationManager.h"
+#import "MMMUpperNotificationManager.h"
 
 
 #define SELF_MINIMUM_HEIGHT 65.f
 #define MESSAGE_MARGIN 20.f
-@interface UpperNotificationView () <UIGestureRecognizerDelegate>
+@interface MMMUpperNotificationView () <UIGestureRecognizerDelegate>
 @end
-@implementation UpperNotificationView
+@implementation MMMUpperNotificationView
 {
     TapHandler _tapHandler;
     UIDynamicAnimator *_dynamicAnimator;
@@ -41,17 +41,17 @@
 }
 + (instancetype)notification
 {
-    UpperNotificationView *notificationView = [[self alloc] initWithMessage:nil image:nil];
+    MMMUpperNotificationView *notificationView = [[self alloc] initWithMessage:nil image:nil];
     return notificationView;
 }
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image
 {
-    UpperNotificationView *notificationView = [[self alloc] initWithMessage:message image:image];
+    MMMUpperNotificationView *notificationView = [[self alloc] initWithMessage:message image:image];
     return notificationView;
 }
 
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler{
-    UpperNotificationView *notificationView = [[self alloc] initWithMessage:message image:image tapHandler:tapHandler];
+    MMMUpperNotificationView *notificationView = [[self alloc] initWithMessage:message image:image tapHandler:tapHandler];
     return notificationView;
 }
 - (id)initWithFrame:(CGRect)frame
@@ -156,16 +156,16 @@
 
 - (void)tapGestureHandler:(id)sender
 {
-    [[UpperNotificationManager sharedManager] tapHandler:self];
+    [[MMMUpperNotificationManager sharedManager] tapHandler:self];
 }
 
 - (void)panGestureHandler:(id)sender
 {
-    [[UpperNotificationManager sharedManager] panGestureHandler:sender notificationView:self];
+    [[MMMUpperNotificationManager sharedManager] panGestureHandler:sender notificationView:self];
 }
 - (void)swipeUpGestureHandler:(id)sender
 {
-    [[UpperNotificationManager sharedManager] dismiss:self];
+    [[MMMUpperNotificationManager sharedManager] dismiss:self];
 
 }
 
@@ -220,7 +220,7 @@
 }
 - (void)show
 {
-    [[UpperNotificationManager sharedManager] showNotificationView:self];
+    [[MMMUpperNotificationManager sharedManager] showNotificationView:self];
 }
 
 
@@ -232,7 +232,7 @@
 @end
 
 
-@implementation UpperNotificationSuccessView
+@implementation MMMUpperNotificationSuccessView
 
 - (void)configureColor
 {
@@ -243,7 +243,7 @@
 
 @end
 
-@implementation UpperNotificationCautionView
+@implementation MMMUpperNotificationCautionView
 
 - (void)configureColor
 {
@@ -255,7 +255,7 @@
 
 @end
 
-@implementation UpperNotificationFaiureView
+@implementation MMMUpperNotificationFaiureView
 - (void)configureColor
 {
     self.backgroundColor = [UIColor colorWithRed:0.761 green:0.278 blue:0.016 alpha:0.950];

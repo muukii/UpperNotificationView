@@ -1,4 +1,4 @@
-// UpperNotificationView.h
+// MMMUpperNotificationView.h
 //
 // Copyright (c) 2014 Muukii (http://www.muukii.me)
 //
@@ -37,7 +37,7 @@ __isIOS7()
 
 typedef void(^TapHandler)();
 
-@interface UpperNotificationView : UIView
+@interface MMMUpperNotificationView : UIView
 @property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, retain) UILabel *messageLabel;
 @property (nonatomic, copy) NSString *message;
@@ -62,14 +62,14 @@ typedef void(^TapHandler)();
 @end
 
 
-@interface UpperNotificationCautionView : UpperNotificationView
+@interface MMMUpperNotificationCautionView : MMMUpperNotificationView
 
 @end
 
-@interface UpperNotificationSuccessView : UpperNotificationView
+@interface MMMUpperNotificationSuccessView : MMMUpperNotificationView
 
 @end
 
-@interface UpperNotificationFaiureView : UpperNotificationView
+@interface MMMUpperNotificationFaiureView : MMMUpperNotificationView
 
 @end

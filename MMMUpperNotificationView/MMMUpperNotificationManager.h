@@ -1,4 +1,4 @@
-// UpperNotificationManager.h
+// MMMUpperNotificationManager.h
 //
 // Copyright (c) 2014 Muukii (http://www.muukii.me)
 //
@@ -21,14 +21,16 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-@class UpperNotificationView;
-@interface UpperNotificationManager : NSObject
+
+@class MMMUpperNotificationView;
+
+@interface MMMUpperNotificationManager : NSObject
 + (instancetype)sharedManager;
 @property (nonatomic, retain) UIWindow *notificationWindow;
 @property (nonatomic, retain) NSMutableArray *notifications;
 
-- (void)showNotificationView:(UpperNotificationView *)notificationView;
-- (void)dismiss:(UpperNotificationView *)notificationView;
-- (void)tapHandler:(UpperNotificationView *)notificationView;
-- (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(UpperNotificationView *)notificationView;
+- (void)showNotificationView:(MMMUpperNotificationView *)notificationView;
+- (void)dismiss:(MMMUpperNotificationView *)notificationView;
+- (void)tapHandler:(MMMUpperNotificationView *)notificationView;
+- (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(MMMUpperNotificationView *)notificationView;
 @end

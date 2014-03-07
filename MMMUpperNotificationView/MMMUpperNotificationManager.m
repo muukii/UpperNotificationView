@@ -1,4 +1,4 @@
-// UpperNotificationManager.m
+// MMMUpperNotificationManager.m
 //
 // Copyright (c) 2014 Muukii (http://www.muukii.me)
 //
@@ -20,11 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "UpperNotificationManager.h"
-#import "UpperNotificationView.h"
+#import "MMMUpperNotificationManager.h"
+#import "MMMUpperNotificationView.h"
+
 #define ANIMATION_DURATION 0.3
 
-@implementation UpperNotificationManager
+@implementation MMMUpperNotificationManager
 {
     UIDynamicAnimator *_dynamicAnimator;
     UIPushBehavior *_pushBehavior;
@@ -53,19 +54,19 @@ static id _sharedInstance = nil;
     return self;
 }
 
-- (void)showNotificationView:(UpperNotificationView *)notificationView
+- (void)showNotificationView:(MMMUpperNotificationView *)notificationView
 {
     [_notifications addObject:notificationView];
     [self display];
 }
-- (void)tapHandler:(UpperNotificationView *)notificationView
+- (void)tapHandler:(MMMUpperNotificationView *)notificationView
 {
     if (notificationView.tapHandler) {
         notificationView.tapHandler();
     }
     [self dismiss:notificationView];
 }
-- (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(UpperNotificationView *)notificationView
+- (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(MMMUpperNotificationView *)notificationView
 {
     if (IsIOS7) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
@@ -115,7 +116,7 @@ static id _sharedInstance = nil;
         showing = YES;
     }
 
-    UpperNotificationView *showNotification = _notifications.firstObject;
+    MMMUpperNotificationView *showNotification = _notifications.firstObject;
     NSLog(@"%@",_notifications);
     if (IsIOS7) {
         CGFloat hiddenHeight = 600;
@@ -162,7 +163,7 @@ static id _sharedInstance = nil;
     });
 
 }
-- (void)displayAgain:(UpperNotificationView *)showNotification
+- (void)displayAgain:(MMMUpperNotificationView *)showNotification
 {
     if (IsIOS7) {
         CGFloat hiddenHeight = 600;
@@ -202,7 +203,7 @@ static id _sharedInstance = nil;
         }];
     }
 }
-- (void)dismiss:(UpperNotificationView *)notificationView
+- (void)dismiss:(MMMUpperNotificationView *)notificationView
 {
     if (IsIOS7) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
