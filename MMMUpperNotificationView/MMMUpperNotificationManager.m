@@ -21,44 +21,55 @@
 // THE SOFTWARE.
 
 #import "MMMUpperNotificationManager.h"
+
 #import "MMMUpperNotificationView.h"
 
-#define ANIMATION_DURATION 0.3
+static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
-@implementation MMMUpperNotificationManager
-{
+@interface MMMUpperNotificationManager ()
++ (instancetype)sharedManager:(BOOL)dealloc;
+@property (nonatomic, strong) UIWindow *notificationWindow;
+@property (nonatomic, strong) NSMutableArray *notifications;
+@end
+
+@implementation MMMUpperNotificationManager {
     UIDynamicAnimator *_dynamicAnimator;
-    UIPushBehavior *_pushBehavior;
-    UIGravityBehavior *_gravityBehavior;
-    UICollisionBehavior* _collision;
     UIView *_dynamicAnimationView;
-    BOOL showing;
-    BOOL closeAnimate;
+    struct {
+        unsigned int isShowing:1;
+        unsigned int isAnimatingToHide:1;
+    } _viewFlags;
 }
-static id _sharedInstance = nil;
-+ (instancetype)sharedManager
+
++ (instancetype)sharedManager:(BOOL)dealloc
 {
-    if (nil == _sharedInstance) {
-        _sharedInstance = [[self alloc] init];
+    static MMMUpperNotificationManager *_sharedInstance = nil;
+    if (dealloc) {
+        _sharedInstance = nil;
+    } else {
+        if (nil == _sharedInstance) {
+            _sharedInstance = [[[self class] alloc] init];
+        }
     }
     return _sharedInstance;
 }
+
++ (instancetype)sharedManager
+{
+    return [[self class] sharedManager:NO];
+}
+
 - (id)init
 {
     self = [super init];
     if (self) {
         _notifications = [NSMutableArray array];
-        _notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, -1, 320, 64)];
+        _notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, -1, CGRectGetWidth([UIScreen mainScreen].bounds), 64)];
         _dynamicAnimationView = [UIView new];
     }
     return self;
 }
 
-- (void)showNotificationView:(MMMUpperNotificationView *)notificationView
-{
-    [_notifications addObject:notificationView];
-    [self display];
-}
 - (void)tapHandler:(MMMUpperNotificationView *)notificationView
 {
     if (notificationView.tapHandler) {
@@ -66,9 +77,10 @@ static id _sharedInstance = nil;
     }
     [self dismiss:notificationView];
 }
+
 - (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(MMMUpperNotificationView *)notificationView
 {
-    if (OSVersionNumberAtLeast_iOS_7_0) {
+    if (NSClassFromString(@"UIDynamicAnimator")) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
         [_dynamicAnimator removeAllBehaviors];
     }
@@ -76,28 +88,31 @@ static id _sharedInstance = nil;
     UIPanGestureRecognizer *panGesture = (UIPanGestureRecognizer *)gesture;
     CGPoint p = [panGesture translationInView:notificationView.superview];
     CGPoint movedPoint = CGPointMake(notificationView.center.x, notificationView.center.y + p.y);
-    CGFloat panLimit = CGRectGetHeight(notificationView.superview.frame) - (CGRectGetHeight(notificationView.frame)/2);
-    if (panLimit <= movedPoint.y) {
-        movedPoint.y = panLimit;
-    }
+    CGFloat panLimit = CGRectGetHeight(notificationView.superview.frame) - (CGRectGetHeight(notificationView.frame) * .5);
+    movedPoint.y = MIN(movedPoint.y, panLimit);
     notificationView.center = movedPoint;
 
     [panGesture setTranslation:CGPointZero inView:notificationView.superview];
 
     if (panGesture.state == UIGestureRecognizerStateEnded || panGesture.state == UIGestureRecognizerStateCancelled || panGesture.state == UIGestureRecognizerStateFailed) {
-        NSLog(@"%f %f",CGRectGetHeight(notificationView.superview.frame) - CGRectGetHeight(notificationView.frame),CGRectGetMinY(notificationView.frame));
         if (CGRectGetHeight(notificationView.superview.frame) - CGRectGetHeight(notificationView.frame) > CGRectGetMinY(notificationView.frame) + 25) {
             [self dismiss:notificationView];
         } else {
-            [self displayAgain:notificationView];
+            [self display:notificationView];
         }
     }
 }
+
+- (void)showNotificationView:(MMMUpperNotificationView *)notificationView
+{
+    [_notifications addObject:notificationView];
+    [self display];
+}
+
 - (void)displayDynamicAnimation
 {
-
-
 }
+
 - (void)display
 {
     if (!_notifications.count) {
@@ -105,56 +120,19 @@ static id _sharedInstance = nil;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             if (!_notifications.count) {
-                _sharedInstance = nil;
+                [[self class] sharedManager:YES];
             }
         });
         return;
     }
-    if (showing) {
+    
+    if (_viewFlags.isShowing) {
         return;
-    } else {
-        showing = YES;
     }
-
+    _viewFlags.isShowing = true;
+    
     MMMUpperNotificationView *showNotification = _notifications.firstObject;
-    NSLog(@"%@",_notifications);
-    if (OSVersionNumberAtLeast_iOS_7_0) {
-        CGFloat hiddenHeight = 600;
-
-        _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
-        [_dynamicAnimationView addSubview:showNotification];
-
-        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:_dynamicAnimationView];
-        _pushBehavior = [[UIPushBehavior alloc] initWithItems:@[showNotification] mode:UIPushBehaviorModeInstantaneous];
-        [_pushBehavior setPushDirection:CGVectorMake(0, 1)];
-
-        _gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
-        CGFloat magnitude = CGRectGetHeight(showNotification.frame) * 0.01 * 3;
-        [_gravityBehavior setMagnitude:magnitude];
-        _collision = [[UICollisionBehavior alloc]
-                      initWithItems:@[showNotification]];
-        _collision.translatesReferenceBoundsIntoBoundary = YES;
-        [_dynamicAnimator addBehavior:_collision];
-        [_dynamicAnimator addBehavior:_gravityBehavior];
-
-        [_notificationWindow addSubview:_dynamicAnimationView];
-        _notificationWindow.windowLevel = UIWindowLevelAlert;
-        [_notificationWindow makeKeyAndVisible];
-    } else {
-        [_notificationWindow addSubview:showNotification];
-        _notificationWindow.windowLevel = UIWindowLevelAlert;
-        [_notificationWindow makeKeyAndVisible];
-
-        CGPoint originPoint = showNotification.center;
-        CGPoint animationPoint = originPoint;
-        animationPoint.y -= CGRectGetHeight(showNotification.frame);
-        showNotification.center = animationPoint;
-        [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            showNotification.center = originPoint;
-        } completion:^(BOOL finished) {
-
-        }];
-    }
+    [self display:showNotification];
 
     double delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -163,26 +141,25 @@ static id _sharedInstance = nil;
     });
 
 }
-- (void)displayAgain:(MMMUpperNotificationView *)showNotification
+
+- (void)display:(MMMUpperNotificationView *)showNotification
 {
-    if (OSVersionNumberAtLeast_iOS_7_0) {
+    if (NSClassFromString(@"UIDynamicAnimator")) {
         CGFloat hiddenHeight = 600;
 
         _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
         [_dynamicAnimationView addSubview:showNotification];
 
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:_dynamicAnimationView];
-        _pushBehavior = [[UIPushBehavior alloc] initWithItems:@[showNotification] mode:UIPushBehaviorModeInstantaneous];
-        [_pushBehavior setPushDirection:CGVectorMake(0, 1)];
-
-        _gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
+        
+        UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
         CGFloat magnitude = CGRectGetHeight(showNotification.frame) * 0.01 * 3;
-        [_gravityBehavior setMagnitude:magnitude];
-        _collision = [[UICollisionBehavior alloc]
-                      initWithItems:@[showNotification]];
-        _collision.translatesReferenceBoundsIntoBoundary = YES;
-        [_dynamicAnimator addBehavior:_collision];
-        [_dynamicAnimator addBehavior:_gravityBehavior];
+        [gravityBehavior setMagnitude:magnitude];
+        [_dynamicAnimator addBehavior:gravityBehavior];
+        
+        UICollisionBehavior* collision = [[UICollisionBehavior alloc] initWithItems:@[showNotification]];
+        collision.translatesReferenceBoundsIntoBoundary = YES;
+        [_dynamicAnimator addBehavior:collision];
 
         [_notificationWindow addSubview:_dynamicAnimationView];
         _notificationWindow.windowLevel = UIWindowLevelAlert;
@@ -196,41 +173,38 @@ static id _sharedInstance = nil;
         CGPoint animationPoint = originPoint;
         animationPoint.y -= CGRectGetHeight(showNotification.frame);
         showNotification.center = animationPoint;
-        [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:kMMMUpperNotificationManagerAnimationDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             showNotification.center = originPoint;
         } completion:^(BOOL finished) {
-            
         }];
     }
 }
+
 - (void)dismiss:(MMMUpperNotificationView *)notificationView
 {
-    if (OSVersionNumberAtLeast_iOS_7_0) {
+    if (NSClassFromString(@"UIDynamicAnimator")) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
         [_dynamicAnimator removeAllBehaviors];
     }
-    if (closeAnimate) {
+    
+    if (_viewFlags.isAnimatingToHide) {
         return;
-    } else {
-        closeAnimate = YES;
     }
-    closeAnimate = YES;
-    NSLog(@"animation");
-    [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    _viewFlags.isAnimatingToHide = false;
+    
+    [UIView animateWithDuration:kMMMUpperNotificationManagerAnimationDuration delay:0. options:UIViewAnimationOptionCurveEaseIn animations:^{
         CGPoint animationPoint = notificationView.center;
         animationPoint.y -= CGRectGetHeight(notificationView.frame);
         notificationView.center = animationPoint;
     } completion:^(BOOL finished) {
-        [self.notifications removeObject:notificationView];
-        [notificationView removeFromSuperview];
-        showing = NO;
-        closeAnimate = NO;
-        [self display];
+        if (finished) {
+            [self.notifications removeObject:notificationView];
+            [notificationView removeFromSuperview];
+            _viewFlags.isShowing = false;
+            _viewFlags.isAnimatingToHide = false;
+            [self display];
+        }
     }];
-}
-- (void)dealloc
-{
-    NSLog(@"UpperNotificationManager dealloc");
 }
 
 @end

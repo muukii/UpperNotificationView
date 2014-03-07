@@ -78,7 +78,7 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
         [self setTapHandler:tapHandler];
         [self configureView];
         [self configureColor];
-        if (OSVersionNumberAtLeast_iOS_7_0) {
+        if (NSClassFromString(@"UIDynamicAnimator")) {
             [self configureDynamicAnimation];
         }
         [self setGesture];
