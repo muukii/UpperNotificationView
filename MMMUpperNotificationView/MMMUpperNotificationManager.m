@@ -26,10 +26,32 @@
 
 static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
+@interface NSMutableArray (Queue)
+- (id)dequeue;
+- (void)enqueue:(id)anObject;
+@end
+
+@implementation NSMutableArray (Queue)
+- (id)dequeue
+{
+    NSAssert(self.count, @"The array does not contain anything.");
+    id obj = [self objectAtIndex:0];
+    if (obj != nil) {
+        [self removeObjectAtIndex:0];
+    }
+    return obj;
+}
+- (void)enqueue:(id)anObject
+{
+    [self addObject:anObject];
+}
+@end
+
 @interface MMMUpperNotificationManager ()
 + (instancetype)sharedManager:(BOOL)dealloc;
 @property (nonatomic, strong) UIWindow *notificationWindow;
 @property (nonatomic, strong) NSMutableArray *notifications;
+@property (readwrite, nonatomic, strong) NSOperationQueue *queue;
 @end
 
 @implementation MMMUpperNotificationManager {
@@ -105,7 +127,7 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
 - (void)showNotificationView:(MMMUpperNotificationView *)notificationView
 {
-    [_notifications addObject:notificationView];
+    [self.notifications enqueue:notificationView];
     [self display];
 }
 
@@ -131,7 +153,7 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
     }
     _viewFlags.isShowing = true;
     
-    MMMUpperNotificationView *showNotification = _notifications.firstObject;
+    MMMUpperNotificationView *showNotification = [self.notifications dequeue];
     [self display:showNotification];
 
     double delayInSeconds = 3.0;
@@ -198,7 +220,6 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
         notificationView.center = animationPoint;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.notifications removeObject:notificationView];
             [notificationView removeFromSuperview];
             _viewFlags.isShowing = false;
             _viewFlags.isAnimatingToHide = false;
