@@ -102,10 +102,9 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
 - (void)panGestureHandler:(UIGestureRecognizer *)gesture notificationView:(MMMUpperNotificationView *)notificationView
 {
-    if (NSClassFromString(@"UIDynamicAnimator")) {
-        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
-        [_dynamicAnimator removeAllBehaviors];
-    }
+    _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
+    [_dynamicAnimator removeAllBehaviors];
+
 
     UIPanGestureRecognizer *panGesture = (UIPanGestureRecognizer *)gesture;
     CGPoint p = [panGesture translationInView:notificationView.superview];
@@ -166,49 +165,33 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
 - (void)display:(MMMUpperNotificationView *)showNotification
 {
-    if (NSClassFromString(@"UIDynamicAnimator")) {
-        CGFloat hiddenHeight = 600;
+    CGFloat hiddenHeight = 600;
+    
+    _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
+    [_dynamicAnimationView addSubview:showNotification];
+    
+    _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:_dynamicAnimationView];
+    
+    UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
+    CGFloat magnitude = CGRectGetHeight(showNotification.frame) * 0.01 * 3;
+    [gravityBehavior setMagnitude:magnitude];
+    [_dynamicAnimator addBehavior:gravityBehavior];
+    
+    UICollisionBehavior* collision = [[UICollisionBehavior alloc] initWithItems:@[showNotification]];
+    collision.translatesReferenceBoundsIntoBoundary = YES;
+    [_dynamicAnimator addBehavior:collision];
+    
+    [_notificationWindow addSubview:_dynamicAnimationView];
+    _notificationWindow.windowLevel = UIWindowLevelAlert;
+    [_notificationWindow makeKeyAndVisible];
 
-        _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
-        [_dynamicAnimationView addSubview:showNotification];
-
-        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:_dynamicAnimationView];
-        
-        UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
-        CGFloat magnitude = CGRectGetHeight(showNotification.frame) * 0.01 * 3;
-        [gravityBehavior setMagnitude:magnitude];
-        [_dynamicAnimator addBehavior:gravityBehavior];
-        
-        UICollisionBehavior* collision = [[UICollisionBehavior alloc] initWithItems:@[showNotification]];
-        collision.translatesReferenceBoundsIntoBoundary = YES;
-        [_dynamicAnimator addBehavior:collision];
-
-        [_notificationWindow addSubview:_dynamicAnimationView];
-        _notificationWindow.windowLevel = UIWindowLevelAlert;
-        [_notificationWindow makeKeyAndVisible];
-    } else {
-        [_notificationWindow addSubview:showNotification];
-        _notificationWindow.windowLevel = UIWindowLevelAlert;
-        [_notificationWindow makeKeyAndVisible];
-
-        CGPoint originPoint = showNotification.center;
-        CGPoint animationPoint = originPoint;
-        animationPoint.y -= CGRectGetHeight(showNotification.frame);
-        showNotification.center = animationPoint;
-        [UIView animateWithDuration:kMMMUpperNotificationManagerAnimationDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            showNotification.center = originPoint;
-        } completion:^(BOOL finished) {
-        }];
-    }
 }
 
 - (void)dismiss:(MMMUpperNotificationView *)notificationView
 {
-    if (NSClassFromString(@"UIDynamicAnimator")) {
-        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
-        [_dynamicAnimator removeAllBehaviors];
-    }
-    
+    _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:nil];
+    [_dynamicAnimator removeAllBehaviors];
+
     if (_viewFlags.isAnimatingToHide) {
         return;
     }
@@ -223,6 +206,7 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
             [notificationView removeFromSuperview];
             _viewFlags.isShowing = false;
             _viewFlags.isAnimatingToHide = false;
+            _notificationWindow.windowLevel = -100;
             [self display];
         }
     }];
