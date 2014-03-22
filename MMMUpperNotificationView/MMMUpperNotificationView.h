@@ -35,7 +35,7 @@ typedef void(^TapHandler)();
 @property (nonatomic, copy) UIImage *image;
 @property (nonatomic, copy) UIColor *backgroundViewColor;
 @property (nonatomic, copy) UIColor *messageTextColor;
-@property (nonatomic, assign) TapHandler tapHandler;
+@property (nonatomic, copy) TapHandler tapHandler;
 
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image;
