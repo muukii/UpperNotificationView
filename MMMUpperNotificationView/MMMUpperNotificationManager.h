@@ -24,7 +24,14 @@
 
 @class MMMUpperNotificationView;
 
+@interface MMMUpperNotificationWindow : UIWindow
+
+@end
+
 @interface MMMUpperNotificationManager : NSObject
+
+@property (nonatomic, strong) MMMUpperNotificationWindow *notificationWindow;
+
 + (instancetype)sharedManager;
 - (void)showNotificationView:(MMMUpperNotificationView *)notificationView;
 - (void)dismiss:(MMMUpperNotificationView *)notificationView;

@@ -23,6 +23,28 @@
 #import "MMMUpperNotificationManager.h"
 
 #import "MMMUpperNotificationView.h"
+@interface MMMUpperNotificationAnimationView : UIView
+@end
+@implementation MMMUpperNotificationAnimationView
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView* view= [super hitTest:point withEvent:event];
+    if(view==self){
+    	return nil;
+    }
+    return view;
+}
+@end
+
+
+@implementation MMMUpperNotificationWindow
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView* view= [super hitTest:point withEvent:event];
+    if(view==self){
+    	return nil;
+    }
+    return view;
+}
+@end
 
 static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
@@ -49,14 +71,13 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
 @interface MMMUpperNotificationManager ()
 + (instancetype)sharedManager:(BOOL)dealloc;
-@property (nonatomic, strong) UIWindow *notificationWindow;
 @property (nonatomic, strong) NSMutableArray *notifications;
 @property (readwrite, nonatomic, strong) NSOperationQueue *queue;
 @end
 
 @implementation MMMUpperNotificationManager {
     UIDynamicAnimator *_dynamicAnimator;
-    UIView *_dynamicAnimationView;
+    MMMUpperNotificationAnimationView *_dynamicAnimationView;
     struct {
         unsigned int isShowing:1;
         unsigned int isAnimatingToHide:1;
@@ -86,8 +107,8 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
     self = [super init];
     if (self) {
         _notifications = [NSMutableArray array];
-        _notificationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, -1, CGRectGetWidth([UIScreen mainScreen].bounds), 64)];
-        _dynamicAnimationView = [UIView new];
+        _notificationWindow = [[MMMUpperNotificationWindow alloc] initWithFrame:CGRectMake(0, -1, CGRectGetWidth([UIScreen mainScreen].bounds), 64)];
+        _dynamicAnimationView = [MMMUpperNotificationAnimationView new];
     }
     return self;
 }
@@ -206,7 +227,6 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
             [notificationView removeFromSuperview];
             _viewFlags.isShowing = false;
             _viewFlags.isAnimatingToHide = false;
-            _notificationWindow.windowLevel = -100;
             [self display];
         }
     }];
