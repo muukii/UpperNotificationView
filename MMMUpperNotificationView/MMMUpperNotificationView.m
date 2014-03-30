@@ -88,7 +88,8 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
     [self.messageLabel setFont:[UIFont systemFontOfSize:14]];
     [self.messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
 
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 14, 36, 36)];
+    self.imageView.clipsToBounds = YES;
     self.imageView.contentMode = UIViewContentModeCenter;
     
     self.backgroundViewColor = [UIColor colorWithWhite:0.000 alpha:0.500];
