@@ -44,6 +44,14 @@
     }
     return view;
 }
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+    }
+    return self;
+}
 @end
 
 static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
@@ -187,25 +195,43 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 - (void)display:(MMMUpperNotificationView *)showNotification
 {
     CGFloat hiddenHeight = 600;
-    
-    _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
-    [_dynamicAnimationView addSubview:showNotification];
-    
-    _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:_dynamicAnimationView];
-    
-    UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
-    CGFloat magnitude = CGRectGetHeight(showNotification.frame) * 0.01 * 3;
-    [gravityBehavior setMagnitude:magnitude];
-    [_dynamicAnimator addBehavior:gravityBehavior];
-    
-    UICollisionBehavior* collision = [[UICollisionBehavior alloc] initWithItems:@[showNotification]];
-    collision.translatesReferenceBoundsIntoBoundary = YES;
-    [_dynamicAnimator addBehavior:collision];
-    
-    [_notificationWindow addSubview:_dynamicAnimationView];
+
+
+    if (1) {
+        [_notificationWindow addSubview:showNotification];
+
+        CGPoint originPoint = showNotification.center;
+        CGPoint animationPoint = originPoint;
+        animationPoint.y -= CGRectGetHeight(showNotification.frame);
+        showNotification.center = animationPoint;
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:0 animations:^{
+            showNotification.center = originPoint;
+
+        } completion:^(BOOL finished) {
+
+        }];
+
+    } else {
+
+        _dynamicAnimationView.frame = CGRectMake(0, -hiddenHeight + CGRectGetHeight(showNotification.frame) , 320, hiddenHeight);
+        [_dynamicAnimationView addSubview:showNotification];
+
+        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:_dynamicAnimationView];
+
+        UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[showNotification]];
+        CGFloat magnitude = CGRectGetHeight(showNotification.frame) * 0.01 * 7;
+        [gravityBehavior setMagnitude:magnitude];
+        [_dynamicAnimator addBehavior:gravityBehavior];
+
+        UICollisionBehavior* collision = [[UICollisionBehavior alloc] initWithItems:@[showNotification]];
+        collision.translatesReferenceBoundsIntoBoundary = YES;
+        [_dynamicAnimator addBehavior:collision];
+
+        [_notificationWindow addSubview:_dynamicAnimationView];
+    }
+
     _notificationWindow.windowLevel = UIWindowLevelAlert;
     [_notificationWindow makeKeyAndVisible];
-
 }
 
 - (void)dismiss:(MMMUpperNotificationView *)notificationView
