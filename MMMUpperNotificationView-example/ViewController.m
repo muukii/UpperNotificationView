@@ -59,6 +59,7 @@
     [super viewDidLoad];
 
     [self setNeedsStatusBarAppearanceUpdate];
+    [MMMUpperNotificationView setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
