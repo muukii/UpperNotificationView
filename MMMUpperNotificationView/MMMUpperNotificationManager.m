@@ -29,6 +29,11 @@
 @end
 
 @implementation MMMUpperNotificationController
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.hidden = YES;
+}
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     _statusBarStyle = statusBarStyle;
