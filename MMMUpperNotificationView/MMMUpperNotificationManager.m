@@ -23,38 +23,61 @@
 #import "MMMUpperNotificationManager.h"
 
 #import "MMMUpperNotificationView.h"
+
+@interface MMMUpperNotificationController : UIViewController
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+@end
+
+@implementation MMMUpperNotificationController
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.hidden = YES;
+}
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    _statusBarStyle = statusBarStyle;
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return _statusBarStyle;
+}
+@end
+
 @interface MMMUpperNotificationAnimationView : UIView
 @end
+
 @implementation MMMUpperNotificationAnimationView
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView* view= [super hitTest:point withEvent:event];
-    if(view==self){
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == self) {
     	return nil;
     }
     return view;
 }
 @end
-
 
 @implementation MMMUpperNotificationWindow
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView* view= [super hitTest:point withEvent:event];
-    if(view==self){
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == self) {
     	return nil;
     }
     return view;
 }
-
-- (id)initWithFrame:(CGRect)frame
+- (void)makeKeyAndVisible
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-    }
-    return self;
+    MMMUpperNotificationController *controller = [MMMUpperNotificationController new];
+    [controller setStatusBarStyle:_statusBarStyle];
+    self.rootViewController = controller;
+    [super makeKeyAndVisible];
 }
 @end
-
-static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 
 @interface NSMutableArray (Queue)
 - (id)dequeue;
@@ -83,6 +106,7 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 @property (readwrite, nonatomic, strong) NSOperationQueue *queue;
 @end
 
+static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
 @implementation MMMUpperNotificationManager {
     UIDynamicAnimator *_dynamicAnimator;
     MMMUpperNotificationAnimationView *_dynamicAnimationView;
@@ -90,6 +114,12 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
         unsigned int isShowing:1;
         unsigned int isAnimatingToHide:1;
     } _viewFlags;
+}
+
+static UIStatusBarStyle _statusBarStyle;
++ (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    _statusBarStyle = statusBarStyle;
 }
 
 + (instancetype)sharedManager:(BOOL)dealloc
@@ -231,6 +261,7 @@ static const NSTimeInterval kMMMUpperNotificationManagerAnimationDuration = .3;
     }
 
     _notificationWindow.windowLevel = UIWindowLevelAlert;
+    _notificationWindow.statusBarStyle = _statusBarStyle;
     [_notificationWindow makeKeyAndVisible];
 }
 

@@ -37,6 +37,7 @@ typedef void(^TapHandler)();
 @property (nonatomic, copy) UIColor *messageTextColor;
 @property (nonatomic, copy) TapHandler tapHandler;
 
++ (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle;
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler;
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image;
 + (instancetype)notification;

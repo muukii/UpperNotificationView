@@ -31,6 +31,11 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
 
 @implementation MMMUpperNotificationView
 
++ (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    [MMMUpperNotificationManager setStatusBarStyle:statusBarStyle];
+}
+
 #pragma mark - MMMUpperNotificationView useful methods
 
 + (instancetype)notificationWithMessage:(NSString *)message image:(UIImage *)image tapHandler:(TapHandler)tapHandler

@@ -25,13 +25,13 @@
 @class MMMUpperNotificationView;
 
 @interface MMMUpperNotificationWindow : UIWindow
-
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 @end
 
 @interface MMMUpperNotificationManager : NSObject
-
 @property (nonatomic, strong) MMMUpperNotificationWindow *notificationWindow;
 
++ (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle;
 + (instancetype)sharedManager;
 - (void)showNotificationView:(MMMUpperNotificationView *)notificationView;
 - (void)dismiss:(MMMUpperNotificationView *)notificationView;
