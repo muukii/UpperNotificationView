@@ -87,13 +87,13 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
 - (void)configureView
 {
     CGFloat messageLabelX = 64;
-    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(messageLabelX, 0, 320 - messageLabelX - 10 , 64)];
+    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(messageLabelX, 0, 320 - messageLabelX - 10 , 56)];
     self.messageLabel.backgroundColor = [UIColor clearColor];
     self.messageLabel.numberOfLines = 3;
     [self.messageLabel setFont:[UIFont systemFontOfSize:14]];
     [self.messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
 
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 14, 36, 36)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 10, 36, 36)];
     self.imageView.clipsToBounds = YES;
     self.imageView.contentMode = UIViewContentModeCenter;
     
@@ -102,6 +102,10 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
 
     [self addSubview:self.messageLabel];
     [self addSubview:self.imageView];
+    
+    UIImageView *withdrawnView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_pushup"]];
+    withdrawnView.center = (CGPoint){self.center.x, CGRectGetHeight(self.bounds) - CGRectGetHeight(withdrawnView.bounds)};
+    [self addSubview:withdrawnView];
 }
 
 - (void)hookConfiguration
