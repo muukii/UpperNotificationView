@@ -21,6 +21,7 @@
 		799E7BDC18CA08FD00BBC57D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799E7BD118CA08FD00BBC57D /* Images.xcassets */; };
 		799E7BDD18CA08FD00BBC57D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BD218CA08FD00BBC57D /* main.m */; };
 		799E7BDF18CA08FD00BBC57D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E7BD618CA08FD00BBC57D /* ViewController.m */; };
+		79C741921911127800014787 /* icon_pushup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C741911911127800014787 /* icon_pushup@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		799E7BD418CA08FD00BBC57D /* UpperNotificationView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UpperNotificationView-Prefix.pch"; sourceTree = "<group>"; };
 		799E7BD518CA08FD00BBC57D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		799E7BD618CA08FD00BBC57D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		79C741911911127800014787 /* icon_pushup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pushup@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		4B674DFA1830B19100C6A98D = {
 			isa = PBXGroup;
 			children = (
+				79C741901911127800014787 /* Resources */,
 				799E7BC718CA08FD00BBC57D /* MMMUpperNotificationView-example */,
 				799E7BC018CA08ED00BBC57D /* MMMUpperNotificationView */,
 				4B674E051830B19100C6A98D /* Frameworks */,
@@ -129,6 +132,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		79C741901911127800014787 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79C741911911127800014787 /* icon_pushup@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -184,6 +195,7 @@
 			files = (
 				799E7BD918CA08FD00BBC57D /* Main_iPhone.storyboard in Resources */,
 				799E7BDC18CA08FD00BBC57D /* Images.xcassets in Resources */,
+				79C741921911127800014787 /* icon_pushup@2x.png in Resources */,
 				799E7BDB18CA08FD00BBC57D /* icon@2x.png in Resources */,
 				799E7BDA18CA08FD00BBC57D /* InfoPlist.strings in Resources */,
 				799E7BD818CA08FD00BBC57D /* Main_iPad.storyboard in Resources */,
