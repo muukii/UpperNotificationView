@@ -207,9 +207,10 @@ static UIStatusBarStyle _statusBarStyle;
     }
 
     if (self.hiddenNotification) {
+        [self.notifications dequeue];
         return;
     }
-    
+
     if (_viewFlags.isShowing) {
         return;
     }
