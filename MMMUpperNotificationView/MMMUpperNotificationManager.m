@@ -205,6 +205,10 @@ static UIStatusBarStyle _statusBarStyle;
         });
         return;
     }
+
+    if (self.hiddenNotification) {
+        return;
+    }
     
     if (_viewFlags.isShowing) {
         return;
@@ -213,9 +217,7 @@ static UIStatusBarStyle _statusBarStyle;
     
     MMMUpperNotificationView *showNotification = [self.notifications dequeue];
     
-    if (self.hiddenNotification) {
-        return;
-    }
+
 
     [self display:showNotification];
 
