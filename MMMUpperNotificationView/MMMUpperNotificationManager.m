@@ -212,6 +212,11 @@ static UIStatusBarStyle _statusBarStyle;
     _viewFlags.isShowing = true;
     
     MMMUpperNotificationView *showNotification = [self.notifications dequeue];
+    
+    if (self.hiddenNotification) {
+        return;
+    }
+
     [self display:showNotification];
 
     double delayInSeconds = 3.0;
