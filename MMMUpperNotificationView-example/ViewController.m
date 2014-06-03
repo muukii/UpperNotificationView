@@ -28,7 +28,7 @@
 @implementation MMMUpperNotificationSuccessView
 - (void)hookConfiguration
 {
-    self.backgroundColor = [UIColor colorWithRed:0.000 green:0.643 blue:0.878 alpha:0.950];
+    self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.85];
     self.messageLabel.textColor = [UIColor whiteColor];
     self.image = [UIImage imageNamed:@"icon"];
 }
@@ -106,7 +106,7 @@
 
 - (IBAction)success:(id)sender
 {
-    NSString *message = [NSString stringWithFormat:@"This is a message for %@.", NSStringFromClass([MMMUpperNotificationSuccessView class])];
+    NSString *message = @"あああああああああああああああああああああああああ";
     MMMUpperNotificationSuccessView *notification = [MMMUpperNotificationSuccessView notificationWithMessage:message image:nil tapHandler:^{
         NSLog(@"Tapped %@", NSStringFromClass([MMMUpperNotificationSuccessView class]));
     }];

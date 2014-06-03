@@ -24,6 +24,8 @@
 
 @class MMMUpperNotificationView;
 
+@class MMMUpperNotificationController;
+
 @interface MMMUpperNotificationWindow : UIWindow
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 @end
@@ -31,6 +33,8 @@
 @interface MMMUpperNotificationManager : NSObject
 @property (nonatomic, assign) BOOL hiddenNotification;
 @property (nonatomic, strong) MMMUpperNotificationWindow *notificationWindow;
+@property (nonatomic, strong) MMMUpperNotificationController *controller;
+
 
 + (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle;
 + (instancetype)sharedManager;

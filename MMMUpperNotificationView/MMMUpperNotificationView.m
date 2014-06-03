@@ -24,7 +24,7 @@
 
 #import "MMMUpperNotificationManager.h"
 
-static const CGFloat kMMMUpperNotificationViewHeight = 65.;
+static const CGFloat kMMMUpperNotificationViewHeight = 20.;
 
 @interface MMMUpperNotificationView () <UIGestureRecognizerDelegate, MMMUpperNotificationViewHook>
 @end
@@ -86,16 +86,16 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
 
 - (void)configureView
 {
-    CGFloat messageLabelX = 64;
-    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(messageLabelX, 0, 320 - messageLabelX - 10 , 56)];
+    CGFloat messageLabelX = 50;
+    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(messageLabelX, 0, 320 - messageLabelX - 10 , kMMMUpperNotificationViewHeight)];
     self.messageLabel.backgroundColor = [UIColor clearColor];
     self.messageLabel.numberOfLines = 3;
-    [self.messageLabel setFont:[UIFont systemFontOfSize:14]];
+    [self.messageLabel setFont:[UIFont systemFontOfSize:11.f]];
     [self.messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
 
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 10, 36, 36)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 4, kMMMUpperNotificationViewHeight-6, kMMMUpperNotificationViewHeight-6)];
     self.imageView.clipsToBounds = YES;
-    self.imageView.contentMode = UIViewContentModeCenter;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.backgroundViewColor = [UIColor colorWithWhite:0.000 alpha:0.500];
     self.messageTextColor = [UIColor whiteColor];
@@ -103,9 +103,9 @@ static const CGFloat kMMMUpperNotificationViewHeight = 65.;
     [self addSubview:self.messageLabel];
     [self addSubview:self.imageView];
     
-    UIImageView *withdrawnView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_pushup"]];
-    withdrawnView.center = (CGPoint){self.center.x, CGRectGetHeight(self.bounds) - CGRectGetHeight(withdrawnView.bounds)};
-    [self addSubview:withdrawnView];
+//    UIImageView *withdrawnView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_pushup"]];
+//    withdrawnView.center = (CGPoint){self.center.x, CGRectGetHeight(self.bounds) - CGRectGetHeight(withdrawnView.bounds)};
+//    [self addSubview:withdrawnView];
 }
 
 - (void)hookConfiguration

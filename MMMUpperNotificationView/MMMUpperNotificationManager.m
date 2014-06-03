@@ -26,6 +26,7 @@
 
 @interface MMMUpperNotificationController : UIViewController
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+@property (nonatomic, assign) BOOL statusBarHidden;
 @end
 
 @implementation MMMUpperNotificationController
@@ -41,9 +42,28 @@
         [self setNeedsStatusBarAppearanceUpdate];
     }
 }
+
+- (void)setStatusBarHidden:(BOOL)statusBarHidden
+{
+    _statusBarHidden = statusBarHidden;
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return _statusBarStyle;
+}
+//スライドするアニメーションを指定
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationSlide;
 }
 @end
 
@@ -72,9 +92,6 @@
 }
 - (void)makeKeyAndVisible
 {
-    MMMUpperNotificationController *controller = [MMMUpperNotificationController new];
-    [controller setStatusBarStyle:_statusBarStyle];
-    self.rootViewController = controller;
     [super makeKeyAndVisible];
 }
 @end
@@ -147,6 +164,11 @@ static UIStatusBarStyle _statusBarStyle;
         _notifications = [NSMutableArray array];
         _notificationWindow = [[MMMUpperNotificationWindow alloc] initWithFrame:CGRectMake(0, -1, CGRectGetWidth([UIScreen mainScreen].bounds), 64)];
         _dynamicAnimationView = [MMMUpperNotificationAnimationView new];
+
+        _controller = [MMMUpperNotificationController new];
+        [_controller setStatusBarStyle:_statusBarStyle];
+        _controller.statusBarHidden = YES;
+        _notificationWindow.rootViewController = _controller;
     }
     return self;
 }
@@ -206,18 +228,12 @@ static UIStatusBarStyle _statusBarStyle;
         return;
     }
 
-    if (self.hiddenNotification) {
-        [self.notifications dequeue];
-        return;
-    }
-
     if (_viewFlags.isShowing) {
         return;
     }
     _viewFlags.isShowing = true;
     
     MMMUpperNotificationView *showNotification = [self.notifications dequeue];
-    
 
 
     [self display:showNotification];
@@ -236,6 +252,7 @@ static UIStatusBarStyle _statusBarStyle;
 
 
     if (1) {
+        _controller.statusBarHidden = YES;
         [_notificationWindow addSubview:showNotification];
 
         CGPoint originPoint = showNotification.center;
@@ -290,6 +307,8 @@ static UIStatusBarStyle _statusBarStyle;
     } completion:^(BOOL finished) {
         if (finished) {
             [notificationView removeFromSuperview];
+            _notificationWindow.windowLevel = -1000;
+            _controller.statusBarHidden = NO;
             _viewFlags.isShowing = false;
             _viewFlags.isAnimatingToHide = false;
             [self display];
